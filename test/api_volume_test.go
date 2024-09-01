@@ -11,10 +11,10 @@ package openapi
 
 import (
 	"context"
+	openapiclient "github.com/menwenjun/jfs-ee-console-go-sdk"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func Test_openapi_VolumeAPIService(t *testing.T) {
@@ -24,7 +24,7 @@ func Test_openapi_VolumeAPIService(t *testing.T) {
 
 	t.Run("Test VolumeAPIService VolumesGet", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.VolumeAPI.VolumesGet(context.Background()).Execute()
 
@@ -36,7 +36,7 @@ func Test_openapi_VolumeAPIService(t *testing.T) {
 
 	t.Run("Test VolumeAPIService VolumesPost", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.VolumeAPI.VolumesPost(context.Background()).Execute()
 
@@ -48,7 +48,7 @@ func Test_openapi_VolumeAPIService(t *testing.T) {
 
 	t.Run("Test VolumeAPIService VolumesVolumeIDClientsGet", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var volumeID int32
 
@@ -62,7 +62,7 @@ func Test_openapi_VolumeAPIService(t *testing.T) {
 
 	t.Run("Test VolumeAPIService VolumesVolumeIDDelete", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var volumeID int32
 
@@ -75,7 +75,7 @@ func Test_openapi_VolumeAPIService(t *testing.T) {
 
 	t.Run("Test VolumeAPIService VolumesVolumeIDGet", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var volumeID int32
 
@@ -89,7 +89,7 @@ func Test_openapi_VolumeAPIService(t *testing.T) {
 
 	t.Run("Test VolumeAPIService VolumesVolumeIDIsReadyGet", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var volumeID int32
 
@@ -103,7 +103,7 @@ func Test_openapi_VolumeAPIService(t *testing.T) {
 
 	t.Run("Test VolumeAPIService VolumesVolumeIDKerberosGet", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var volumeID int32
 
@@ -117,7 +117,7 @@ func Test_openapi_VolumeAPIService(t *testing.T) {
 
 	t.Run("Test VolumeAPIService VolumesVolumeIDKerberosPatch", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var volumeID int32
 
@@ -131,7 +131,7 @@ func Test_openapi_VolumeAPIService(t *testing.T) {
 
 	t.Run("Test VolumeAPIService VolumesVolumeIDListDirGet", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var volumeID int32
 
@@ -145,7 +145,7 @@ func Test_openapi_VolumeAPIService(t *testing.T) {
 
 	t.Run("Test VolumeAPIService VolumesVolumeIDMetricsGet", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var volumeID int32
 
@@ -159,7 +159,7 @@ func Test_openapi_VolumeAPIService(t *testing.T) {
 
 	t.Run("Test VolumeAPIService VolumesVolumeIDMirrorsGet", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var volumeID int32
 
@@ -173,7 +173,7 @@ func Test_openapi_VolumeAPIService(t *testing.T) {
 
 	t.Run("Test VolumeAPIService VolumesVolumeIDMirrorsPost", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var volumeID int32
 
@@ -187,7 +187,7 @@ func Test_openapi_VolumeAPIService(t *testing.T) {
 
 	t.Run("Test VolumeAPIService VolumesVolumeIDRangerGet", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var volumeID int32
 
@@ -201,7 +201,7 @@ func Test_openapi_VolumeAPIService(t *testing.T) {
 
 	t.Run("Test VolumeAPIService VolumesVolumeIDRangerPatch", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var volumeID int32
 
@@ -215,7 +215,7 @@ func Test_openapi_VolumeAPIService(t *testing.T) {
 
 	t.Run("Test VolumeAPIService VolumesVolumeIDSettingGet", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var volumeID int32
 
@@ -229,7 +229,7 @@ func Test_openapi_VolumeAPIService(t *testing.T) {
 
 	t.Run("Test VolumeAPIService VolumesVolumeIDSettingPost", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var volumeID int32
 

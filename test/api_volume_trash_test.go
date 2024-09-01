@@ -11,10 +11,10 @@ package openapi
 
 import (
 	"context"
+	openapiclient "github.com/menwenjun/jfs-ee-console-go-sdk"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func Test_openapi_VolumeTrashAPIService(t *testing.T) {
@@ -24,7 +24,7 @@ func Test_openapi_VolumeTrashAPIService(t *testing.T) {
 
 	t.Run("Test VolumeTrashAPIService VolumesVolumeIDDeleteTrashPost", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var volumeID int32
 
@@ -37,7 +37,7 @@ func Test_openapi_VolumeTrashAPIService(t *testing.T) {
 
 	t.Run("Test VolumeTrashAPIService VolumesVolumeIDEmptyTrashPost", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var volumeID int32
 
@@ -50,7 +50,7 @@ func Test_openapi_VolumeTrashAPIService(t *testing.T) {
 
 	t.Run("Test VolumeTrashAPIService VolumesVolumeIDListTrashGet", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var volumeID int32
 
@@ -64,7 +64,7 @@ func Test_openapi_VolumeTrashAPIService(t *testing.T) {
 
 	t.Run("Test VolumeTrashAPIService VolumesVolumeIDRestoreFilePost", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var volumeID int32
 

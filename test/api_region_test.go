@@ -11,10 +11,10 @@ package openapi
 
 import (
 	"context"
+	openapiclient "github.com/menwenjun/jfs-ee-console-go-sdk"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func Test_openapi_RegionAPIService(t *testing.T) {
@@ -24,7 +24,7 @@ func Test_openapi_RegionAPIService(t *testing.T) {
 
 	t.Run("Test RegionAPIService RegionsGet", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		resp, httpRes, err := apiClient.RegionAPI.RegionsGet(context.Background()).Execute()
 
@@ -36,7 +36,7 @@ func Test_openapi_RegionAPIService(t *testing.T) {
 
 	t.Run("Test RegionAPIService RegionsRegionIDGet", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var regionID int32
 
@@ -50,7 +50,7 @@ func Test_openapi_RegionAPIService(t *testing.T) {
 
 	t.Run("Test RegionAPIService RegionsRegionIDMetricsGet", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var regionID int32
 
@@ -64,7 +64,7 @@ func Test_openapi_RegionAPIService(t *testing.T) {
 
 	t.Run("Test RegionAPIService RegionsRegionIDTrashtimeGet", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var regionID int32
 
@@ -78,7 +78,7 @@ func Test_openapi_RegionAPIService(t *testing.T) {
 
 	t.Run("Test RegionAPIService RegionsRegionIDTrashtimePut", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var regionID int32
 

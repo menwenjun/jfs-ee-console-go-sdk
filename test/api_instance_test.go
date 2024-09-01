@@ -11,10 +11,10 @@ package openapi
 
 import (
 	"context"
+	openapiclient "github.com/menwenjun/jfs-ee-console-go-sdk"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	"testing"
-	openapiclient "github.com/GIT_USER_ID/GIT_REPO_ID"
 )
 
 func Test_openapi_InstanceAPIService(t *testing.T) {
@@ -24,7 +24,7 @@ func Test_openapi_InstanceAPIService(t *testing.T) {
 
 	t.Run("Test InstanceAPIService MetadatasMetadataIDInstancesGet", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var metadataID int32
 
@@ -38,7 +38,7 @@ func Test_openapi_InstanceAPIService(t *testing.T) {
 
 	t.Run("Test InstanceAPIService MetadatasMetadataIDInstancesInstanceIDGet", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var metadataID int32
 		var instanceID int32
@@ -53,7 +53,7 @@ func Test_openapi_InstanceAPIService(t *testing.T) {
 
 	t.Run("Test InstanceAPIService MetadatasMetadataIDInstancesInstanceIDPatch", func(t *testing.T) {
 
-		t.Skip("skip test")  // remove to run test
+		t.Skip("skip test") // remove to run test
 
 		var metadataID int32
 		var instanceID int32
