@@ -6,10 +6,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **int32** |  | 
 **Path** | **string** |  | 
-**Inodes** | **int32** |  | 
-**Size** | **int32** |  | 
-**UsedInodes** | Pointer to **int32** |  | [optional] 
-**UsedSize** | Pointer to **int32** |  | [optional] 
+**Inodes** | **int64** |  | 
+**Size** | **int64** |  | 
+**UsedInodes** | Pointer to **int64** |  | [optional] 
+**UsedSize** | Pointer to **int64** |  | [optional] 
 **Created** | Pointer to **time.Time** |  | [optional] 
 **Updated** | Pointer to **time.Time** |  | [optional] 
 
@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 
 ### NewGettableVolumeQuota
 
-`func NewGettableVolumeQuota(id int32, path string, inodes int32, size int32, ) *GettableVolumeQuota`
+`func NewGettableVolumeQuota(id int32, path string, inodes int64, size int64, ) *GettableVolumeQuota`
 
 NewGettableVolumeQuota instantiates a new GettableVolumeQuota object
 This constructor will assign default values to properties that have it defined,
@@ -74,60 +74,60 @@ SetPath sets Path field to given value.
 
 ### GetInodes
 
-`func (o *GettableVolumeQuota) GetInodes() int32`
+`func (o *GettableVolumeQuota) GetInodes() int64`
 
 GetInodes returns the Inodes field if non-nil, zero value otherwise.
 
 ### GetInodesOk
 
-`func (o *GettableVolumeQuota) GetInodesOk() (*int32, bool)`
+`func (o *GettableVolumeQuota) GetInodesOk() (*int64, bool)`
 
 GetInodesOk returns a tuple with the Inodes field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetInodes
 
-`func (o *GettableVolumeQuota) SetInodes(v int32)`
+`func (o *GettableVolumeQuota) SetInodes(v int64)`
 
 SetInodes sets Inodes field to given value.
 
 
 ### GetSize
 
-`func (o *GettableVolumeQuota) GetSize() int32`
+`func (o *GettableVolumeQuota) GetSize() int64`
 
 GetSize returns the Size field if non-nil, zero value otherwise.
 
 ### GetSizeOk
 
-`func (o *GettableVolumeQuota) GetSizeOk() (*int32, bool)`
+`func (o *GettableVolumeQuota) GetSizeOk() (*int64, bool)`
 
 GetSizeOk returns a tuple with the Size field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSize
 
-`func (o *GettableVolumeQuota) SetSize(v int32)`
+`func (o *GettableVolumeQuota) SetSize(v int64)`
 
 SetSize sets Size field to given value.
 
 
 ### GetUsedInodes
 
-`func (o *GettableVolumeQuota) GetUsedInodes() int32`
+`func (o *GettableVolumeQuota) GetUsedInodes() int64`
 
 GetUsedInodes returns the UsedInodes field if non-nil, zero value otherwise.
 
 ### GetUsedInodesOk
 
-`func (o *GettableVolumeQuota) GetUsedInodesOk() (*int32, bool)`
+`func (o *GettableVolumeQuota) GetUsedInodesOk() (*int64, bool)`
 
 GetUsedInodesOk returns a tuple with the UsedInodes field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUsedInodes
 
-`func (o *GettableVolumeQuota) SetUsedInodes(v int32)`
+`func (o *GettableVolumeQuota) SetUsedInodes(v int64)`
 
 SetUsedInodes sets UsedInodes field to given value.
 
@@ -139,20 +139,20 @@ HasUsedInodes returns a boolean if a field has been set.
 
 ### GetUsedSize
 
-`func (o *GettableVolumeQuota) GetUsedSize() int32`
+`func (o *GettableVolumeQuota) GetUsedSize() int64`
 
 GetUsedSize returns the UsedSize field if non-nil, zero value otherwise.
 
 ### GetUsedSizeOk
 
-`func (o *GettableVolumeQuota) GetUsedSizeOk() (*int32, bool)`
+`func (o *GettableVolumeQuota) GetUsedSizeOk() (*int64, bool)`
 
 GetUsedSizeOk returns a tuple with the UsedSize field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUsedSize
 
-`func (o *GettableVolumeQuota) SetUsedSize(v int32)`
+`func (o *GettableVolumeQuota) SetUsedSize(v int64)`
 
 SetUsedSize sets UsedSize field to given value.
 

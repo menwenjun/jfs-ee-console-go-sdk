@@ -24,8 +24,8 @@ type MirrorVolume struct {
 	Id *int32 `json:"id,omitempty"`
 	AccessRules []GettableVolumeAllOfAccessRules `json:"access_rules,omitempty"`
 	Owner *int32 `json:"owner,omitempty"`
-	Size NullableInt32 `json:"size,omitempty"`
-	Inodes NullableInt32 `json:"inodes,omitempty"`
+	Size NullableInt64 `json:"size,omitempty"`
+	Inodes NullableInt64 `json:"inodes,omitempty"`
 	Created *time.Time `json:"created,omitempty"`
 	Uuid *string `json:"uuid,omitempty"`
 	Name *string `json:"name,omitempty" validate:"regexp=^[a-z][0-9a-z-]{1,38}[0-9a-z]$"`
@@ -171,9 +171,9 @@ func (o *MirrorVolume) SetOwner(v int32) {
 }
 
 // GetSize returns the Size field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *MirrorVolume) GetSize() int32 {
+func (o *MirrorVolume) GetSize() int64 {
 	if o == nil || IsNil(o.Size.Get()) {
-		var ret int32
+		var ret int64
 		return ret
 	}
 	return *o.Size.Get()
@@ -182,7 +182,7 @@ func (o *MirrorVolume) GetSize() int32 {
 // GetSizeOk returns a tuple with the Size field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *MirrorVolume) GetSizeOk() (*int32, bool) {
+func (o *MirrorVolume) GetSizeOk() (*int64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -198,8 +198,8 @@ func (o *MirrorVolume) HasSize() bool {
 	return false
 }
 
-// SetSize gets a reference to the given NullableInt32 and assigns it to the Size field.
-func (o *MirrorVolume) SetSize(v int32) {
+// SetSize gets a reference to the given NullableInt64 and assigns it to the Size field.
+func (o *MirrorVolume) SetSize(v int64) {
 	o.Size.Set(&v)
 }
 // SetSizeNil sets the value for Size to be an explicit nil
@@ -213,9 +213,9 @@ func (o *MirrorVolume) UnsetSize() {
 }
 
 // GetInodes returns the Inodes field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *MirrorVolume) GetInodes() int32 {
+func (o *MirrorVolume) GetInodes() int64 {
 	if o == nil || IsNil(o.Inodes.Get()) {
-		var ret int32
+		var ret int64
 		return ret
 	}
 	return *o.Inodes.Get()
@@ -224,7 +224,7 @@ func (o *MirrorVolume) GetInodes() int32 {
 // GetInodesOk returns a tuple with the Inodes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *MirrorVolume) GetInodesOk() (*int32, bool) {
+func (o *MirrorVolume) GetInodesOk() (*int64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -240,8 +240,8 @@ func (o *MirrorVolume) HasInodes() bool {
 	return false
 }
 
-// SetInodes gets a reference to the given NullableInt32 and assigns it to the Inodes field.
-func (o *MirrorVolume) SetInodes(v int32) {
+// SetInodes gets a reference to the given NullableInt64 and assigns it to the Inodes field.
+func (o *MirrorVolume) SetInodes(v int64) {
 	o.Inodes.Set(&v)
 }
 // SetInodesNil sets the value for Inodes to be an explicit nil

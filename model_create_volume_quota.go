@@ -25,9 +25,9 @@ type CreateVolumeQuota struct {
 	// The directory to be set quota on
 	Path string `json:"path"`
 	// Total inodes, `0` or blank means no limit
-	Inodes *int32 `json:"inodes,omitempty"`
+	Inodes *int64 `json:"inodes,omitempty"`
 	// Total size in bytes, `0` or blank means no limit
-	Size *int32 `json:"size,omitempty"`
+	Size *int64 `json:"size,omitempty"`
 }
 
 type _CreateVolumeQuota CreateVolumeQuota
@@ -75,9 +75,9 @@ func (o *CreateVolumeQuota) SetPath(v string) {
 }
 
 // GetInodes returns the Inodes field value if set, zero value otherwise.
-func (o *CreateVolumeQuota) GetInodes() int32 {
+func (o *CreateVolumeQuota) GetInodes() int64 {
 	if o == nil || IsNil(o.Inodes) {
-		var ret int32
+		var ret int64
 		return ret
 	}
 	return *o.Inodes
@@ -85,7 +85,7 @@ func (o *CreateVolumeQuota) GetInodes() int32 {
 
 // GetInodesOk returns a tuple with the Inodes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateVolumeQuota) GetInodesOk() (*int32, bool) {
+func (o *CreateVolumeQuota) GetInodesOk() (*int64, bool) {
 	if o == nil || IsNil(o.Inodes) {
 		return nil, false
 	}
@@ -101,15 +101,15 @@ func (o *CreateVolumeQuota) HasInodes() bool {
 	return false
 }
 
-// SetInodes gets a reference to the given int32 and assigns it to the Inodes field.
-func (o *CreateVolumeQuota) SetInodes(v int32) {
+// SetInodes gets a reference to the given int64 and assigns it to the Inodes field.
+func (o *CreateVolumeQuota) SetInodes(v int64) {
 	o.Inodes = &v
 }
 
 // GetSize returns the Size field value if set, zero value otherwise.
-func (o *CreateVolumeQuota) GetSize() int32 {
+func (o *CreateVolumeQuota) GetSize() int64 {
 	if o == nil || IsNil(o.Size) {
-		var ret int32
+		var ret int64
 		return ret
 	}
 	return *o.Size
@@ -117,7 +117,7 @@ func (o *CreateVolumeQuota) GetSize() int32 {
 
 // GetSizeOk returns a tuple with the Size field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CreateVolumeQuota) GetSizeOk() (*int32, bool) {
+func (o *CreateVolumeQuota) GetSizeOk() (*int64, bool) {
 	if o == nil || IsNil(o.Size) {
 		return nil, false
 	}
@@ -133,8 +133,8 @@ func (o *CreateVolumeQuota) HasSize() bool {
 	return false
 }
 
-// SetSize gets a reference to the given int32 and assigns it to the Size field.
-func (o *CreateVolumeQuota) SetSize(v int32) {
+// SetSize gets a reference to the given int64 and assigns it to the Size field.
+func (o *CreateVolumeQuota) SetSize(v int64) {
 	o.Size = &v
 }
 

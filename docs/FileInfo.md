@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** |  | [optional] 
 **IsDir** | Pointer to **bool** |  | [optional] 
 **Type** | Pointer to **string** | - f: file - l: symlink - d: directory - q: fifo - b: block device - c: character device - s: socket - t: trash file  | [optional] 
-**Length** | Pointer to **int32** |  | [optional] 
+**Length** | Pointer to **int64** |  | [optional] 
 **Nlink** | Pointer to **int32** |  | [optional] 
 **Mtime** | Pointer to **int32** |  | [optional] 
 
@@ -107,20 +107,20 @@ HasType returns a boolean if a field has been set.
 
 ### GetLength
 
-`func (o *FileInfo) GetLength() int32`
+`func (o *FileInfo) GetLength() int64`
 
 GetLength returns the Length field if non-nil, zero value otherwise.
 
 ### GetLengthOk
 
-`func (o *FileInfo) GetLengthOk() (*int32, bool)`
+`func (o *FileInfo) GetLengthOk() (*int64, bool)`
 
 GetLengthOk returns a tuple with the Length field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLength
 
-`func (o *FileInfo) SetLength(v int32)`
+`func (o *FileInfo) SetLength(v int64)`
 
 SetLength sets Length field to given value.
 

@@ -24,7 +24,7 @@ type FileInfo struct {
 	IsDir *bool `json:"is_dir,omitempty"`
 	// - f: file - l: symlink - d: directory - q: fifo - b: block device - c: character device - s: socket - t: trash file 
 	Type *string `json:"type,omitempty"`
-	Length *int32 `json:"length,omitempty"`
+	Length *int64 `json:"length,omitempty"`
 	Nlink *int32 `json:"nlink,omitempty"`
 	Mtime *int32 `json:"mtime,omitempty"`
 }
@@ -143,9 +143,9 @@ func (o *FileInfo) SetType(v string) {
 }
 
 // GetLength returns the Length field value if set, zero value otherwise.
-func (o *FileInfo) GetLength() int32 {
+func (o *FileInfo) GetLength() int64 {
 	if o == nil || IsNil(o.Length) {
-		var ret int32
+		var ret int64
 		return ret
 	}
 	return *o.Length
@@ -153,7 +153,7 @@ func (o *FileInfo) GetLength() int32 {
 
 // GetLengthOk returns a tuple with the Length field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FileInfo) GetLengthOk() (*int32, bool) {
+func (o *FileInfo) GetLengthOk() (*int64, bool) {
 	if o == nil || IsNil(o.Length) {
 		return nil, false
 	}
@@ -169,8 +169,8 @@ func (o *FileInfo) HasLength() bool {
 	return false
 }
 
-// SetLength gets a reference to the given int32 and assigns it to the Length field.
-func (o *FileInfo) SetLength(v int32) {
+// SetLength gets a reference to the given int64 and assigns it to the Length field.
+func (o *FileInfo) SetLength(v int64) {
 	o.Length = &v
 }
 

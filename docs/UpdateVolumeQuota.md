@@ -5,8 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Path** | Pointer to **string** | The directory to be set quota on, it must be equal to the original path if it&#39;s provided | [optional] 
-**Inodes** | Pointer to **int32** | Total inodes, &#x60;0&#x60; means no limit | [optional] 
-**Size** | Pointer to **int32** | Total size in bytes, &#x60;0&#x60; means no limit | [optional] 
+**Inodes** | Pointer to **int64** | Total inodes, &#x60;0&#x60; means no limit | [optional] 
+**Size** | Pointer to **int64** | Total size in bytes, &#x60;0&#x60; means no limit | [optional] 
 
 ## Methods
 
@@ -54,20 +54,20 @@ HasPath returns a boolean if a field has been set.
 
 ### GetInodes
 
-`func (o *UpdateVolumeQuota) GetInodes() int32`
+`func (o *UpdateVolumeQuota) GetInodes() int64`
 
 GetInodes returns the Inodes field if non-nil, zero value otherwise.
 
 ### GetInodesOk
 
-`func (o *UpdateVolumeQuota) GetInodesOk() (*int32, bool)`
+`func (o *UpdateVolumeQuota) GetInodesOk() (*int64, bool)`
 
 GetInodesOk returns a tuple with the Inodes field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetInodes
 
-`func (o *UpdateVolumeQuota) SetInodes(v int32)`
+`func (o *UpdateVolumeQuota) SetInodes(v int64)`
 
 SetInodes sets Inodes field to given value.
 
@@ -79,20 +79,20 @@ HasInodes returns a boolean if a field has been set.
 
 ### GetSize
 
-`func (o *UpdateVolumeQuota) GetSize() int32`
+`func (o *UpdateVolumeQuota) GetSize() int64`
 
 GetSize returns the Size field if non-nil, zero value otherwise.
 
 ### GetSizeOk
 
-`func (o *UpdateVolumeQuota) GetSizeOk() (*int32, bool)`
+`func (o *UpdateVolumeQuota) GetSizeOk() (*int64, bool)`
 
 GetSizeOk returns a tuple with the Size field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSize
 
-`func (o *UpdateVolumeQuota) SetSize(v int32)`
+`func (o *UpdateVolumeQuota) SetSize(v int64)`
 
 SetSize sets Size field to given value.
 

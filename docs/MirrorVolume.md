@@ -7,8 +7,8 @@ Name | Type | Description | Notes
 **Id** | Pointer to **int32** |  | [optional] 
 **AccessRules** | Pointer to [**[]GettableVolumeAllOfAccessRules**](GettableVolumeAllOfAccessRules.md) |  | [optional] 
 **Owner** | Pointer to **int32** |  | [optional] 
-**Size** | Pointer to **NullableInt32** |  | [optional] 
-**Inodes** | Pointer to **NullableInt32** |  | [optional] 
+**Size** | Pointer to **NullableInt64** |  | [optional] 
+**Inodes** | Pointer to **NullableInt64** |  | [optional] 
 **Created** | Pointer to **time.Time** |  | [optional] 
 **Uuid** | Pointer to **string** |  | [optional] 
 **Name** | Pointer to **string** |  | [optional] 
@@ -118,20 +118,20 @@ HasOwner returns a boolean if a field has been set.
 
 ### GetSize
 
-`func (o *MirrorVolume) GetSize() int32`
+`func (o *MirrorVolume) GetSize() int64`
 
 GetSize returns the Size field if non-nil, zero value otherwise.
 
 ### GetSizeOk
 
-`func (o *MirrorVolume) GetSizeOk() (*int32, bool)`
+`func (o *MirrorVolume) GetSizeOk() (*int64, bool)`
 
 GetSizeOk returns a tuple with the Size field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSize
 
-`func (o *MirrorVolume) SetSize(v int32)`
+`func (o *MirrorVolume) SetSize(v int64)`
 
 SetSize sets Size field to given value.
 
@@ -153,20 +153,20 @@ HasSize returns a boolean if a field has been set.
 UnsetSize ensures that no value is present for Size, not even an explicit nil
 ### GetInodes
 
-`func (o *MirrorVolume) GetInodes() int32`
+`func (o *MirrorVolume) GetInodes() int64`
 
 GetInodes returns the Inodes field if non-nil, zero value otherwise.
 
 ### GetInodesOk
 
-`func (o *MirrorVolume) GetInodesOk() (*int32, bool)`
+`func (o *MirrorVolume) GetInodesOk() (*int64, bool)`
 
 GetInodesOk returns a tuple with the Inodes field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetInodes
 
-`func (o *MirrorVolume) SetInodes(v int32)`
+`func (o *MirrorVolume) SetInodes(v int64)`
 
 SetInodes sets Inodes field to given value.
 
