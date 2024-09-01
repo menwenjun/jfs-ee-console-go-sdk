@@ -1,0 +1,2713 @@
+openapi: 3.0.3
+info:
+  contact:
+    email: team@juicedata.io
+    name: Juicedata team
+    url: https://juicefs.com/contact
+  description: API of the JuiceFS console (https://juicefs.com/api/v1)
+  license:
+    name: Apache 2.0
+    url: https://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: https://juicefs.com/term/service
+  title: JuiceFS console API
+  version: 0.0.1
+servers:
+- url: /api/v1
+tags:
+- name: Volume
+- name: Volume ACL
+- name: Volume quota
+- name: Volume trash
+- name: Cloud
+- name: Region
+- name: Node
+- name: Metadata
+- name: Instance
+paths:
+  /clouds:
+    get:
+      description: Get cloud list
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Cloud'
+                type: array
+      tags:
+      - Cloud
+  /clouds/{cloudID}:
+    get:
+      description: Get cloud by ID
+      parameters:
+      - description: ID of the cloud
+        explode: false
+        in: path
+        name: cloudID
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cloud'
+      tags:
+      - Cloud
+  /regions:
+    get:
+      description: Get region list
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Region'
+                type: array
+      summary: Get region list
+      tags:
+      - Region
+  /regions/{regionID}:
+    get:
+      description: "Return details of the region specified by {regionID}"
+      parameters:
+      - description: ID of the region
+        explode: false
+        in: path
+        name: regionID
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+        style: simple
+      - allowEmptyValue: false
+        deprecated: true
+        description: "Token of the region, it's once used for authentication, now\
+          \ deprecated. please use access key/secret key instead."
+        explode: true
+        in: query
+        name: token
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Region'
+          description: Detail of region
+      summary: Get region by ID
+      tags:
+      - Region
+  /regions/{regionID}/trashtime:
+    get:
+      description: Get region trashtime(days)
+      parameters:
+      - description: ID of the region
+        explode: false
+        in: path
+        name: regionID
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+        style: simple
+      - allowEmptyValue: false
+        deprecated: true
+        description: "Token of the region, it's once used for authentication, now\
+          \ deprecated. please use access key/secret key instead."
+        explode: true
+        in: query
+        name: token
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrashTime'
+      tags:
+      - Region
+    put:
+      description: Update trashtime(days) for the region
+      parameters:
+      - description: ID of the region
+        explode: false
+        in: path
+        name: regionID
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+        style: simple
+      - allowEmptyValue: false
+        deprecated: true
+        description: "Token of the region, it's once used for authentication, now\
+          \ deprecated. please use access key/secret key instead."
+        explode: true
+        in: query
+        name: token
+        required: false
+        schema:
+          type: string
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TrashTime'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrashTime'
+      summary: Set region trashtime(days)
+      tags:
+      - Region
+  /regions/{regionID}/metrics:
+    get:
+      description: Return prometheus format region metrics
+      parameters:
+      - description: ID of the region
+        explode: false
+        in: path
+        name: regionID
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+        style: simple
+      - allowEmptyValue: false
+        deprecated: true
+        description: "Token of the region, it's once used for authentication, now\
+          \ deprecated. please use access key/secret key instead."
+        explode: true
+        in: query
+        name: token
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              example: |
+                # HELP juicefs_stat_inodes Used inodes
+                # TYPE juicefs_stat_inodes gauge
+                juicefs_stat_inodes{dns="demo-region-1.meta.juicefs.com",subdir="/demo-vol"} 41.0
+                juicefs_stat_inodes{dns="demo-region-1.meta.juicefs.com",subdir="/demo-vol/abc"} 3.0
+                juicefs_stat_inodes{dns="demo-region-1.meta.juicefs.com",subdir="/demo-vol/dir1/dir2/dir3/dir4/dir5/dir6/dir7/dir8/dir9/dir10"} 5.0
+                # HELP juicefs_stat_size Used size (bytes)
+                # TYPE juicefs_stat_size gauge
+                juicefs_stat_size{dns="demo-region-1.meta.juicefs.com",subdir="/demo-vol"} 2080530432.0
+                juicefs_stat_size{dns="demo-region-1.meta.juicefs.com",subdir="/demo-vol/abc"} 1073741824.0
+                juicefs_stat_size{dns="demo-region-1.meta.juicefs.com",subdir="/demo-vol/dir1/dir2/dir3/dir4/dir5/dir6/dir7/dir8/dir9/dir10"} 20480.0
+                ...
+              schema:
+                type: string
+      summary: Get region metrics
+      tags:
+      - Region
+  /nodes:
+    get:
+      description: Return node list of the region identified by region token
+      parameters:
+      - allowEmptyValue: false
+        deprecated: true
+        description: "Token of the region, it's once used for authentication, now\
+          \ deprecated. please use access key/secret key instead."
+        explode: true
+        in: query
+        name: token
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Node'
+                type: array
+      summary: Get node list
+      tags:
+      - Node
+  /nodes/{nodeID}:
+    get:
+      description: Return details of the node
+      parameters:
+      - description: ID of the node
+        explode: false
+        in: path
+        name: nodeID
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+        style: simple
+      - allowEmptyValue: false
+        deprecated: true
+        description: "Token of the region, it's once used for authentication, now\
+          \ deprecated. please use access key/secret key instead."
+        explode: true
+        in: query
+        name: token
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Node'
+      summary: Get node by ID
+      tags:
+      - Node
+    patch:
+      description: Update node properties
+      parameters:
+      - description: ID of the node
+        explode: false
+        in: path
+        name: nodeID
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+        style: simple
+      - allowEmptyValue: false
+        deprecated: true
+        description: "Token of the region, it's once used for authentication, now\
+          \ deprecated. please use access key/secret key instead."
+        explode: true
+        in: query
+        name: token
+        required: false
+        schema:
+          type: string
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Node'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Node'
+      tags:
+      - Node
+    put:
+      description: Update node
+      parameters:
+      - description: ID of the node
+        explode: false
+        in: path
+        name: nodeID
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+        style: simple
+      - allowEmptyValue: false
+        deprecated: true
+        description: "Token of the region, it's once used for authentication, now\
+          \ deprecated. please use access key/secret key instead."
+        explode: true
+        in: query
+        name: token
+        required: false
+        schema:
+          type: string
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Node'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Node'
+      summary: Update node by ID
+      tags:
+      - Node
+  /metadatas:
+    get:
+      description: Return metadata list of the region identified by region token
+      parameters:
+      - allowEmptyValue: false
+        deprecated: true
+        description: "Token of the region, it's once used for authentication, now\
+          \ deprecated. please use access key/secret key instead."
+        explode: true
+        in: query
+        name: token
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/Metadata'
+                type: array
+      summary: Get metadata list
+      tags:
+      - Metadata
+  /metadatas/{metadataID}:
+    get:
+      description: Return details of metadata
+      parameters:
+      - description: ID of the metadata
+        explode: false
+        in: path
+        name: metadataID
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+        style: simple
+      - allowEmptyValue: false
+        deprecated: true
+        description: "Token of the region, it's once used for authentication, now\
+          \ deprecated. please use access key/secret key instead."
+        explode: true
+        in: query
+        name: token
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Metadata'
+      summary: Get metadata by ID
+      tags:
+      - Metadata
+  /metadatas/{metadataID}/license:
+    get:
+      description: Return license info for this metadata
+      parameters:
+      - description: ID of the metadata
+        explode: false
+        in: path
+        name: metadataID
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+        style: simple
+      - allowEmptyValue: false
+        deprecated: true
+        description: "Token of the region, it's once used for authentication, now\
+          \ deprecated. please use access key/secret key instead."
+        explode: true
+        in: query
+        name: token
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetadataLicense'
+      summary: Get current license
+      tags:
+      - Metadata
+    put:
+      description: Update license(only available for on-premise deployment)
+      parameters:
+      - description: ID of the metadata
+        explode: false
+        in: path
+        name: metadataID
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+        style: simple
+      - allowEmptyValue: false
+        deprecated: true
+        description: "Token of the region, it's once used for authentication, now\
+          \ deprecated. please use access key/secret key instead."
+        explode: true
+        in: query
+        name: token
+        required: false
+        schema:
+          type: string
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MetadataLicense'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetadataLicense'
+      summary: Set license
+      tags:
+      - Metadata
+  /metadata-dns:
+    get:
+      description: "Resolve the domain name of the metadata, return a list of node\
+        \ IP."
+      parameters:
+      - explode: true
+        in: query
+        name: name
+        required: true
+        schema:
+          description: the domain name of the metadata
+          example: abc.meta.juicefs.com
+          type: string
+        style: form
+      - explode: true
+        in: query
+        name: cache
+        required: false
+        schema:
+          description: use cached result if cache is true
+          example: true
+          type: bool
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_metadata_dns_get_200_response'
+      summary: Resolve domain name
+      tags:
+      - Metadata
+  /metadatas/{metadataID}/instances:
+    get:
+      description: Return instance list for this metadata
+      parameters:
+      - description: ID of the metadata
+        explode: false
+        in: path
+        name: metadataID
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+        style: simple
+      - allowEmptyValue: false
+        deprecated: true
+        description: "Token of the region, it's once used for authentication, now\
+          \ deprecated. please use access key/secret key instead."
+        explode: true
+        in: query
+        name: token
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/MetadataInstance'
+                type: array
+      summary: Get instance list
+      tags:
+      - Instance
+  /metadatas/{metadataID}/instances/{instanceID}:
+    get:
+      description: Return instance list for this metadata
+      parameters:
+      - description: ID of the metadata
+        explode: false
+        in: path
+        name: metadataID
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+        style: simple
+      - description: ID of the JuiceFS metadata instance
+        explode: false
+        in: path
+        name: instanceID
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+        style: simple
+      - allowEmptyValue: false
+        deprecated: true
+        description: "Token of the region, it's once used for authentication, now\
+          \ deprecated. please use access key/secret key instead."
+        explode: true
+        in: query
+        name: token
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetadataInstance'
+      summary: Get instance by ID
+      tags:
+      - Instance
+    patch:
+      description: Update instance properties
+      parameters:
+      - description: ID of the metadata
+        explode: false
+        in: path
+        name: metadataID
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+        style: simple
+      - description: ID of the JuiceFS metadata instance
+        explode: false
+        in: path
+        name: instanceID
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+        style: simple
+      - allowEmptyValue: false
+        deprecated: true
+        description: "Token of the region, it's once used for authentication, now\
+          \ deprecated. please use access key/secret key instead."
+        explode: true
+        in: query
+        name: token
+        required: false
+        schema:
+          type: string
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/MetadataInstance'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MetadataInstance'
+      summary: Update instance properties
+      tags:
+      - Instance
+  /volumes:
+    get:
+      description: Return volume list for this region
+      parameters:
+      - allowEmptyValue: false
+        deprecated: true
+        description: "Token of the region, it's once used for authentication, now\
+          \ deprecated. please use access key/secret key instead."
+        explode: true
+        in: query
+        name: token
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/gettableVolume'
+                type: array
+      summary: Get volume list
+      tags:
+      - Volume
+    post:
+      description: Create a volume
+      parameters:
+      - allowEmptyValue: false
+        deprecated: true
+        description: "Token of the region, it's once used for authentication, now\
+          \ deprecated. please use access key/secret key instead."
+        explode: true
+        in: query
+        name: token
+        required: false
+        schema:
+          type: string
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/postableVolume'
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/gettableVolume'
+        "400":
+          content:
+            application/json:
+              schema:
+                type: object
+      tags:
+      - Volume
+  /volumes/{volumeID}:
+    delete:
+      description: Delete volume by ID
+      parameters:
+      - description: ID of the JuiceFS volume
+        explode: false
+        in: path
+        name: volumeID
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+        style: simple
+      - allowEmptyValue: false
+        deprecated: true
+        description: "Token of the region, it's once used for authentication, now\
+          \ deprecated. please use access key/secret key instead."
+        explode: true
+        in: query
+        name: token
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "204":
+          description: Delete succeed
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_volumes__volumeID__get_404_response'
+          description: Not Found
+        "428":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_volumes__volumeID__get_404_response'
+          description: Precondition Required
+      tags:
+      - Volume
+    get:
+      description: Get volume by ID
+      parameters:
+      - description: ID of the JuiceFS volume
+        explode: false
+        in: path
+        name: volumeID
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+        style: simple
+      - allowEmptyValue: false
+        deprecated: true
+        description: "Token of the region, it's once used for authentication, now\
+          \ deprecated. please use access key/secret key instead."
+        explode: true
+        in: query
+        name: token
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/gettableVolume'
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_volumes__volumeID__get_404_response'
+          description: The volume with specified ID doesn't exist
+      tags:
+      - Volume
+  /volumes/{volumeID}/is_ready:
+    get:
+      parameters:
+      - description: ID of the JuiceFS volume
+        explode: false
+        in: path
+        name: volumeID
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+        style: simple
+      - allowEmptyValue: false
+        deprecated: true
+        description: "Token of the region, it's once used for authentication, now\
+          \ deprecated. please use access key/secret key instead."
+        explode: true
+        in: query
+        name: token
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_volumes__volumeID__is_ready_get_200_response'
+      summary: Volume has been ready or not
+      tags:
+      - Volume
+  /volumes/{volumeID}/listDir:
+    get:
+      description: "List all the files and directories within the given path. directories\
+        \ come first, then files and symbolic links"
+      parameters:
+      - description: ID of the JuiceFS volume
+        explode: false
+        in: path
+        name: volumeID
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+        style: simple
+      - allowEmptyValue: false
+        deprecated: true
+        description: "Token of the region, it's once used for authentication, now\
+          \ deprecated. please use access key/secret key instead."
+        explode: true
+        in: query
+        name: token
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: The directory to be listed
+        explode: true
+        in: query
+        name: path
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: A keyword used to search files(case insensitive)
+        explode: true
+        in: query
+        name: query
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: "Page number, starting with `0`"
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Page size
+        explode: true
+        in: query
+        name: "n"
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: |
+          Limit the number of children to be listed. The maximum value is 1000000 for On-premises, 100000 for SaaS.
+
+          You should be careful when setting this value to a large number, listDir may become slow or even timeout.
+        explode: true
+        in: query
+        name: children_limit
+        required: false
+        schema:
+          minimum: 1
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/FileInfo'
+                type: array
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_volumes__volumeID__listDir_get_400_response'
+          description: "Bad request, see `error` field for details"
+      summary: List directory
+      tags:
+      - Volume
+  /volumes/{volumeID}/listTrash:
+    get:
+      description: List all the files in trash
+      parameters:
+      - description: ID of the JuiceFS volume
+        explode: false
+        in: path
+        name: volumeID
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+        style: simple
+      - allowEmptyValue: false
+        deprecated: true
+        description: "Token of the region, it's once used for authentication, now\
+          \ deprecated. please use access key/secret key instead."
+        explode: true
+        in: query
+        name: token
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: keyword
+        explode: true
+        in: query
+        name: query
+        required: false
+        schema:
+          type: string
+        style: form
+      - description: "Page number, starting with `0`"
+        explode: true
+        in: query
+        name: page
+        required: false
+        schema:
+          type: integer
+        style: form
+      - description: Page size
+        explode: true
+        in: query
+        name: "n"
+        required: false
+        schema:
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_volumes__volumeID__listTrash_get_200_response'
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_volumes__volumeID__listTrash_get_400_response'
+          description: "Bad request, see `error` field for details"
+      summary: List trash files
+      tags:
+      - Volume trash
+  /volumes/{volumeID}/deleteTrash:
+    post:
+      description: Delete files from trash permanently
+      parameters:
+      - description: ID of the JuiceFS volume
+        explode: false
+        in: path
+        name: volumeID
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+        style: simple
+      - allowEmptyValue: false
+        deprecated: true
+        description: "Token of the region, it's once used for authentication, now\
+          \ deprecated. please use access key/secret key instead."
+        explode: true
+        in: query
+        name: token
+        required: false
+        schema:
+          type: string
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Inodes'
+        description: List of file inodes to be deleted in trash
+      responses:
+        "200":
+          description: Delete succeed
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_volumes__volumeID__listTrash_get_400_response'
+      summary: Delete from trash
+      tags:
+      - Volume trash
+  /volumes/{volumeID}/emptyTrash:
+    post:
+      description: "It may take some time to empty trash, depend on the number of\
+        \ files in trash"
+      parameters:
+      - description: ID of the JuiceFS volume
+        explode: false
+        in: path
+        name: volumeID
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+        style: simple
+      - allowEmptyValue: false
+        deprecated: true
+        description: "Token of the region, it's once used for authentication, now\
+          \ deprecated. please use access key/secret key instead."
+        explode: true
+        in: query
+        name: token
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          description: The task to empty trash was started
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_volumes__volumeID__listTrash_get_400_response'
+      summary: Empty trash asynchronously
+      tags:
+      - Volume trash
+  /volumes/{volumeID}/restoreFile:
+    post:
+      description: Restore files from trash to their original path
+      parameters:
+      - description: ID of the JuiceFS volume
+        explode: false
+        in: path
+        name: volumeID
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+        style: simple
+      - allowEmptyValue: false
+        deprecated: true
+        description: "Token of the region, it's once used for authentication, now\
+          \ deprecated. please use access key/secret key instead."
+        explode: true
+        in: query
+        name: token
+        required: false
+        schema:
+          type: string
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Inodes'
+        description: List of file inodes to be deleted in trash
+      responses:
+        "200":
+          description: Restore succeed
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_volumes__volumeID__listTrash_get_400_response'
+      summary: Restore from trash
+      tags:
+      - Volume trash
+  /volumes/{volumeID}/metrics:
+    get:
+      description: Return prometheus format volume metrics
+      parameters:
+      - description: ID of the JuiceFS volume
+        explode: false
+        in: path
+        name: volumeID
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+        style: simple
+      - allowEmptyValue: false
+        deprecated: true
+        description: "Token of the region, it's once used for authentication, now\
+          \ deprecated. please use access key/secret key instead."
+        explode: true
+        in: query
+        name: token
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            '*/*':
+              example: |
+                # HELP juicefs_size gauge
+                # TYPE juicefs_size gauge
+                juicefs_size{name="demo-vol1"} 1994482816.0
+                # HELP juicefs_inodes gauge
+                # TYPE juicefs_inodes gauge
+                juicefs_inodes{name="demo-vol1"} 32.0
+                # HELP juicefs_meta_operations metadata operations
+                # TYPE juicefs_meta_operations counter
+                juicefs_meta_operations{host="demo-region-1",ip="172.28.224.5",mountpoint="/share/public",name="demo-vol1",op="statfs",sessionid="30932"} 128.0
+                juicefs_meta_operations{host="demo-region-1",ip="172.28.224.5",mountpoint="/share/public",name="demo-vol1",op="getattr",sessionid="30932"} 0.0
+                juicefs_meta_operations{host="demo-region-1",ip="172.28.224.5",mountpoint="/share/public",name="demo-vol1",op="setattr",sessionid="30932"} 0.0
+                juicefs_meta_operations{host="demo-region-1",ip="172.28.224.5",mountpoint="/share/public",name="demo-vol1",op="lookup",sessionid="30932"} 0.0
+                juicefs_meta_operations{host="demo-region-1",ip="172.28.224.5",mountpoint="/share/public",name="demo-vol1",op="mkdir",sessionid="30932"} 0.0
+                ...
+              schema:
+                type: string
+      summary: Get volume metrics
+      tags:
+      - Volume
+  /volumes/{volumeID}/setting:
+    get:
+      description: Get volume trashtime (days)
+      parameters:
+      - description: ID of the JuiceFS volume
+        explode: false
+        in: path
+        name: volumeID
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+        style: simple
+      - allowEmptyValue: false
+        deprecated: true
+        description: "Token of the region, it's once used for authentication, now\
+          \ deprecated. please use access key/secret key instead."
+        explode: true
+        in: query
+        name: token
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrashTime'
+      tags:
+      - Volume
+    post:
+      description: Set volume trashtime (days)
+      parameters:
+      - description: ID of the JuiceFS volume
+        explode: false
+        in: path
+        name: volumeID
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+        style: simple
+      - allowEmptyValue: false
+        deprecated: true
+        description: "Token of the region, it's once used for authentication, now\
+          \ deprecated. please use access key/secret key instead."
+        explode: true
+        in: query
+        name: token
+        required: false
+        schema:
+          type: string
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/TrashTime'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/TrashTime'
+      tags:
+      - Volume
+  /volumes/{volumeID}/clients:
+    get:
+      description: Get mounted clients within 2 hours for this volume
+      parameters:
+      - description: ID of the JuiceFS volume
+        explode: false
+        in: path
+        name: volumeID
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+        style: simple
+      - allowEmptyValue: false
+        deprecated: true
+        description: "Token of the region, it's once used for authentication, now\
+          \ deprecated. please use access key/secret key instead."
+        explode: true
+        in: query
+        name: token
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/VolumeClient'
+                type: array
+      summary: Get mounted clients
+      tags:
+      - Volume
+  /volumes/{volumeID}/exports:
+    get:
+      description: List all exports(ACL rules) of this volume
+      parameters:
+      - description: ID of the JuiceFS volume
+        explode: false
+        in: path
+        name: volumeID
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+        style: simple
+      - allowEmptyValue: false
+        deprecated: true
+        description: "Token of the region, it's once used for authentication, now\
+          \ deprecated. please use access key/secret key instead."
+        explode: true
+        in: query
+        name: token
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/gettableVolumeExport'
+                type: array
+      summary: Get ACL list
+      tags:
+      - Volume ACL
+    post:
+      description: Create an export(ACL rule)
+      parameters:
+      - description: ID of the JuiceFS volume
+        explode: false
+        in: path
+        name: volumeID
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+        style: simple
+      - allowEmptyValue: false
+        deprecated: true
+        description: "Token of the region, it's once used for authentication, now\
+          \ deprecated. please use access key/secret key instead."
+        explode: true
+        in: query
+        name: token
+        required: false
+        schema:
+          type: string
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/postableVolumeExport'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/gettableVolumeExport'
+                type: array
+      summary: Create ACL
+      tags:
+      - Volume ACL
+  /volumes/{volumeID}/exports/{volumeExportID}:
+    delete:
+      description: Delete export(ACL rule) by ID
+      parameters:
+      - description: ID of the JuiceFS volume
+        explode: false
+        in: path
+        name: volumeID
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+        style: simple
+      - description: ID of the JuiceFS volume export
+        explode: false
+        in: path
+        name: volumeExportID
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+        style: simple
+      - allowEmptyValue: false
+        deprecated: true
+        description: "Token of the region, it's once used for authentication, now\
+          \ deprecated. please use access key/secret key instead."
+        explode: true
+        in: query
+        name: token
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "204":
+          description: Delete succeed
+      summary: Delete ACL
+      tags:
+      - Volume ACL
+    get:
+      description: Get export(ACL rule) by ID
+      parameters:
+      - description: ID of the JuiceFS volume
+        explode: false
+        in: path
+        name: volumeID
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+        style: simple
+      - description: ID of the JuiceFS volume export
+        explode: false
+        in: path
+        name: volumeExportID
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+        style: simple
+      - allowEmptyValue: false
+        deprecated: true
+        description: "Token of the region, it's once used for authentication, now\
+          \ deprecated. please use access key/secret key instead."
+        explode: true
+        in: query
+        name: token
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/gettableVolumeExport'
+      summary: Get ACL by ID
+      tags:
+      - Volume ACL
+    put:
+      description: Update export(ACL rule) by ID
+      parameters:
+      - description: ID of the JuiceFS volume
+        explode: false
+        in: path
+        name: volumeID
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+        style: simple
+      - description: ID of the JuiceFS volume export
+        explode: false
+        in: path
+        name: volumeExportID
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+        style: simple
+      - allowEmptyValue: false
+        deprecated: true
+        description: "Token of the region, it's once used for authentication, now\
+          \ deprecated. please use access key/secret key instead."
+        explode: true
+        in: query
+        name: token
+        required: false
+        schema:
+          type: string
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/postableVolumeExport'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/gettableVolumeExport'
+      summary: Update ACL by ID
+      tags:
+      - Volume ACL
+  /volumes/{volumeID}/quotas:
+    get:
+      description: List all quotas of this volume
+      parameters:
+      - description: ID of the JuiceFS volume
+        explode: false
+        in: path
+        name: volumeID
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+        style: simple
+      - allowEmptyValue: false
+        deprecated: true
+        description: "Token of the region, it's once used for authentication, now\
+          \ deprecated. please use access key/secret key instead."
+        explode: true
+        in: query
+        name: token
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/gettableVolumeQuota'
+                type: array
+      summary: Get quota list
+      tags:
+      - Volume quota
+    post:
+      description: Set quota for volume path
+      parameters:
+      - description: ID of the JuiceFS volume
+        explode: false
+        in: path
+        name: volumeID
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+        style: simple
+      - allowEmptyValue: false
+        deprecated: true
+        description: "Token of the region, it's once used for authentication, now\
+          \ deprecated. please use access key/secret key instead."
+        explode: true
+        in: query
+        name: token
+        required: false
+        schema:
+          type: string
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/createVolumeQuota'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                items:
+                  $ref: '#/components/schemas/gettableVolumeQuota'
+                type: array
+      summary: Set quota
+      tags:
+      - Volume quota
+  /volumes/{volumeID}/quotas/{volumeQuotaID}:
+    delete:
+      description: Delete quota by ID
+      parameters:
+      - description: ID of the JuiceFS volume
+        explode: false
+        in: path
+        name: volumeID
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+        style: simple
+      - description: ID of the JuiceFS volume quota
+        explode: false
+        in: path
+        name: volumeQuotaID
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+        style: simple
+      - allowEmptyValue: false
+        deprecated: true
+        description: "Token of the region, it's once used for authentication, now\
+          \ deprecated. please use access key/secret key instead."
+        explode: true
+        in: query
+        name: token
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "204":
+          description: Delete succeed
+      tags:
+      - Volume quota
+    get:
+      description: Get quota by ID
+      parameters:
+      - description: ID of the JuiceFS volume
+        explode: false
+        in: path
+        name: volumeID
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+        style: simple
+      - description: ID of the JuiceFS volume quota
+        explode: false
+        in: path
+        name: volumeQuotaID
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+        style: simple
+      - allowEmptyValue: false
+        deprecated: true
+        description: "Token of the region, it's once used for authentication, now\
+          \ deprecated. please use access key/secret key instead."
+        explode: true
+        in: query
+        name: token
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/gettableVolumeQuota'
+      tags:
+      - Volume quota
+    put:
+      description: The `path` must remain the same
+      parameters:
+      - description: ID of the JuiceFS volume
+        explode: false
+        in: path
+        name: volumeID
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+        style: simple
+      - description: ID of the JuiceFS volume quota
+        explode: false
+        in: path
+        name: volumeQuotaID
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+        style: simple
+      - allowEmptyValue: false
+        deprecated: true
+        description: "Token of the region, it's once used for authentication, now\
+          \ deprecated. please use access key/secret key instead."
+        explode: true
+        in: query
+        name: token
+        required: false
+        schema:
+          type: string
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/updateVolumeQuota'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/gettableVolumeQuota'
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/_volumes__volumeID__quotas__volumeQuotaID__put_400_response'
+          description: Bad request
+      summary: Update quota by ID
+      tags:
+      - Volume quota
+  /volumes/{volumeID}/kerberos:
+    get:
+      description: Get volume's kerberos configuration
+      parameters:
+      - description: ID of the JuiceFS volume
+        explode: false
+        in: path
+        name: volumeID
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+        style: simple
+      - allowEmptyValue: false
+        deprecated: true
+        description: "Token of the region, it's once used for authentication, now\
+          \ deprecated. please use access key/secret key instead."
+        explode: true
+        in: query
+        name: token
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VolumeKerberos'
+      tags:
+      - Volume
+    patch:
+      description: Update volume's kerberos configuration
+      parameters:
+      - description: ID of the JuiceFS volume
+        explode: false
+        in: path
+        name: volumeID
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+        style: simple
+      - allowEmptyValue: false
+        deprecated: true
+        description: "Token of the region, it's once used for authentication, now\
+          \ deprecated. please use access key/secret key instead."
+        explode: true
+        in: query
+        name: token
+        required: false
+        schema:
+          type: string
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VolumeKerberos'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VolumeKerberos'
+      tags:
+      - Volume
+  /volumes/{volumeID}/ranger:
+    get:
+      description: Get volume's ranger configuration
+      parameters:
+      - description: ID of the JuiceFS volume
+        explode: false
+        in: path
+        name: volumeID
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+        style: simple
+      - allowEmptyValue: false
+        deprecated: true
+        description: "Token of the region, it's once used for authentication, now\
+          \ deprecated. please use access key/secret key instead."
+        explode: true
+        in: query
+        name: token
+        required: false
+        schema:
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VolumeRanger'
+      tags:
+      - Volume
+    patch:
+      description: Update volume's ranger configuration
+      parameters:
+      - description: ID of the JuiceFS volume
+        explode: false
+        in: path
+        name: volumeID
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+        style: simple
+      - allowEmptyValue: false
+        deprecated: true
+        description: "Token of the region, it's once used for authentication, now\
+          \ deprecated. please use access key/secret key instead."
+        explode: true
+        in: query
+        name: token
+        required: false
+        schema:
+          type: string
+        style: form
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/VolumeRanger'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VolumeRanger'
+      tags:
+      - Volume
+  /volumes/{volumeID}/mirrors:
+    get:
+      description: Get mirror volumes
+      parameters:
+      - description: ID of the JuiceFS volume
+        explode: false
+        in: path
+        name: volumeID
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MirrorVolume'
+      tags:
+      - Volume
+    post:
+      description: Create mirror volume
+      parameters:
+      - description: ID of the JuiceFS volume
+        explode: false
+        in: path
+        name: volumeID
+        required: true
+        schema:
+          minimum: 1
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CreateMirrorVolume'
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CreateMirrorVolume'
+      tags:
+      - Volume
+components:
+  parameters:
+    regionToken:
+      allowEmptyValue: false
+      deprecated: true
+      description: "Token of the region, it's once used for authentication, now deprecated.\
+        \ please use access key/secret key instead."
+      explode: true
+      in: query
+      name: token
+      required: false
+      schema:
+        type: string
+      style: form
+    cloudID:
+      description: ID of the cloud
+      explode: false
+      in: path
+      name: cloudID
+      required: true
+      schema:
+        minimum: 1
+        type: integer
+      style: simple
+    regionID:
+      description: ID of the region
+      explode: false
+      in: path
+      name: regionID
+      required: true
+      schema:
+        minimum: 1
+        type: integer
+      style: simple
+    nodeID:
+      description: ID of the node
+      explode: false
+      in: path
+      name: nodeID
+      required: true
+      schema:
+        minimum: 1
+        type: integer
+      style: simple
+    metadataID:
+      description: ID of the metadata
+      explode: false
+      in: path
+      name: metadataID
+      required: true
+      schema:
+        minimum: 1
+        type: integer
+      style: simple
+    instanceID:
+      description: ID of the JuiceFS metadata instance
+      explode: false
+      in: path
+      name: instanceID
+      required: true
+      schema:
+        minimum: 1
+        type: integer
+      style: simple
+    volumeID:
+      description: ID of the JuiceFS volume
+      explode: false
+      in: path
+      name: volumeID
+      required: true
+      schema:
+        minimum: 1
+        type: integer
+      style: simple
+    volumeQuotaID:
+      description: ID of the JuiceFS volume quota
+      explode: false
+      in: path
+      name: volumeQuotaID
+      required: true
+      schema:
+        minimum: 1
+        type: integer
+      style: simple
+    volumeExportID:
+      description: ID of the JuiceFS volume export
+      explode: false
+      in: path
+      name: volumeExportID
+      required: true
+      schema:
+        minimum: 1
+        type: integer
+      style: simple
+  schemas:
+    Cloud:
+      example:
+        name: AWS
+        storage: s3
+      properties:
+        name:
+          example: AWS
+          type: string
+        storage:
+          example: s3
+          type: string
+      type: object
+    Region:
+      example:
+        cloud: 1
+        desp: desp
+        owner: 1
+        trashtime: 0
+        name: name
+        id: 1
+        token: token
+      properties:
+        id:
+          minimum: 1
+          type: integer
+        cloud:
+          minimum: 1
+          type: integer
+        name:
+          type: string
+        desp:
+          type: string
+        owner:
+          minimum: 1
+          type: integer
+        token:
+          type: string
+        trashtime:
+          minimum: 0
+          type: integer
+      type: object
+    TrashTime:
+      example:
+        trashtime: 0
+      properties:
+        trashtime:
+          minimum: 0
+          type: integer
+      type: object
+    Node:
+      example:
+        memory: 4.0
+        disks: ""
+        ip: 172.26.23.4
+        name: name
+        active: true
+        id: 1
+      properties:
+        id:
+          minimum: 1
+          readOnly: true
+          type: integer
+        name:
+          readOnly: true
+          type: string
+        ip:
+          example: 172.26.23.4
+          readOnly: true
+          type: string
+        disks:
+          example: ""
+          type: string
+        active:
+          readOnly: true
+          type: boolean
+        memory:
+          example: 4.0
+          format: double
+          minimum: 0.0
+          readOnly: true
+          type: number
+      type: object
+    Metadata:
+      example:
+        parent: 5
+        port: 1
+        instance_set:
+        - 1
+        - 1
+        dns: dns
+        zoneid: 0
+        id: 1
+        region: 1
+        expireAt: 2000-01-23T04:56:07.000+00:00
+        sizeCap: 1
+      properties:
+        id:
+          minimum: 1
+          readOnly: true
+          type: integer
+        dns:
+          type: string
+        port:
+          minimum: 1
+          type: integer
+        region:
+          minimum: 1
+          type: integer
+        parent:
+          nullable: true
+          type: integer
+        zoneid:
+          minimum: 0
+          type: integer
+        sizeCap:
+          minimum: 1
+          type: integer
+        expireAt:
+          format: date-time
+          nullable: true
+          type: string
+        instance_set:
+          items:
+            minimum: 1
+            type: integer
+          type: array
+      type: object
+    MetadataLicense:
+      example:
+        license: license
+        size_cap: 10240
+        dns: dns
+        expired_at: 2000-01-23T04:56:07.000+00:00
+      properties:
+        dns:
+          type: string
+        expired_at:
+          format: date-time
+          type: string
+        size_cap:
+          example: 10240
+          minimum: 1
+          type: integer
+        license:
+          type: string
+      type: object
+    MetadataInstance:
+      example:
+        node: 1
+        meta: 1
+        id: 1
+        logOnly: false
+        config:
+          ANY_CONFIG_KEY: VALUE
+        updated: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          minimum: 1
+          readOnly: true
+          type: integer
+        meta:
+          minimum: 1
+          readOnly: true
+          type: integer
+        node:
+          minimum: 1
+          type: integer
+        logOnly:
+          default: false
+          type: boolean
+        config:
+          $ref: '#/components/schemas/MetadataInstance_config'
+        updated:
+          format: date-time
+          readOnly: true
+          type: string
+      type: object
+    Volume:
+      properties:
+        name:
+          example: demo-vol1
+          pattern: "^[a-z][0-9a-z-]{1,38}[0-9a-z]$"
+          type: string
+        region:
+          example: 1
+          minimum: 1
+          type: integer
+        bucket:
+          default: juicefs-<Volume name>
+          example: juicefs-demo-vol1
+          type: string
+        trashtime:
+          description: "Days to keep deleted files, set to zero to disable. Files\
+            \ in trash remains billable, learn more at <a href=\"https://juicefs.com/docs/cloud/trash\"\
+            \ target=\"_blank\">our docs</a>."
+          example: 1
+          type: integer
+        blockSize:
+          default: 4096
+          enum:
+          - 256
+          - 512
+          - 1024
+          - 2048
+          - 4096
+          - 8192
+          type: integer
+        compress:
+          default: lz4
+          enum:
+          - lz4
+          - zstd
+          - none
+          type: string
+        compatible:
+          default: false
+          type: boolean
+        extend:
+          example: ""
+          type: string
+        storage:
+          nullable: true
+          type: string
+          example: null
+      type: object
+    gettableVolume:
+      allOf:
+      - properties:
+          id:
+            minimum: 1
+            type: integer
+          access_rules:
+            items:
+              $ref: '#/components/schemas/gettableVolume_allOf_access_rules'
+            type: array
+          owner:
+            minimum: 1
+            type: integer
+          size:
+            nullable: true
+            type: integer
+          inodes:
+            nullable: true
+            type: integer
+          created:
+            format: date-time
+            type: string
+          uuid:
+            example: 2de5cc9f-f1f9-484d-9ada-38b068be5e71
+            type: string
+        type: object
+      - $ref: '#/components/schemas/Volume'
+      example:
+        owner: 1
+        compress: lz4
+        inodes: 5
+        created: 2000-01-23T04:56:07.000+00:00
+        access_rules:
+        - appendonly: false
+          readonly: false
+          iprange: '*'
+          token: d9ae3e863a050e4fd01f3c0a0665e870d305b347
+        - appendonly: false
+          readonly: false
+          iprange: '*'
+          token: d9ae3e863a050e4fd01f3c0a0665e870d305b347
+        storage: storage
+        uuid: 2de5cc9f-f1f9-484d-9ada-38b068be5e71
+        blockSize: 5
+        bucket: juicefs-demo-vol1
+        extend: ""
+        compatible: false
+        size: 1
+        trashtime: 1
+        name: demo-vol1
+        id: 1
+        region: 1
+    postableVolume:
+      allOf:
+      - $ref: '#/components/schemas/Volume'
+      - required:
+        - name
+        - region
+        type: object
+    MirrorVolume:
+      allOf:
+      - $ref: '#/components/schemas/gettableVolume'
+      - properties:
+          source:
+            minimum: 1
+            type: integer
+        type: object
+      example:
+        owner: 1
+        compress: lz4
+        inodes: 5
+        created: 2000-01-23T04:56:07.000+00:00
+        access_rules:
+        - appendonly: false
+          readonly: false
+          iprange: '*'
+          token: d9ae3e863a050e4fd01f3c0a0665e870d305b347
+        - appendonly: false
+          readonly: false
+          iprange: '*'
+          token: d9ae3e863a050e4fd01f3c0a0665e870d305b347
+        storage: storage
+        source: 1
+        uuid: 2de5cc9f-f1f9-484d-9ada-38b068be5e71
+        blockSize: 5
+        bucket: juicefs-demo-vol1
+        extend: ""
+        compatible: false
+        size: 1
+        trashtime: 1
+        name: demo-vol1
+        id: 1
+        region: 1
+    CreateMirrorVolume:
+      allOf:
+      - $ref: '#/components/schemas/Volume'
+      - properties:
+          bucket:
+            default: ""
+            description: |
+              The bucket of the mirror volume.
+              - If it is not provided or equal to the source volume's bucket,
+              then the mirror volume and the source volume will share the same bucket.
+              - Otherwise, the mirror volume's bucket will replicate the source volume's bucket.
+            example: juicefs-demo-vol1
+            type: string
+        required:
+        - name
+        - region
+        type: object
+      example:
+        bucket: juicefs-demo-vol1
+        extend: ""
+        compatible: false
+        trashtime: 1
+        compress: lz4
+        name: demo-vol1
+        storage: storage
+        region: 1
+        blockSize: 0
+    gettableVolumeExport:
+      example:
+        apionly: false
+        extend: ""
+        appendonly: false
+        subdir: /path/to/subdir
+        readonly: false
+        qos: ""
+        passwd: 41bb953fa782302f4c46755cc2b8e32a00fc5b13
+        iprange: '*'
+        id: 1
+        internalip: false
+        desc: default
+        token: d9ae3e863a050e4fd01f3c0a0665e870d305b347
+      properties:
+        id:
+          minimum: 1
+          type: integer
+        desc:
+          example: default
+          type: string
+        iprange:
+          example: '*'
+          type: string
+        apionly:
+          example: false
+          type: boolean
+        readonly:
+          example: false
+          type: boolean
+        appendonly:
+          example: false
+          type: boolean
+        internalip:
+          example: false
+          type: boolean
+        token:
+          example: d9ae3e863a050e4fd01f3c0a0665e870d305b347
+          type: string
+        passwd:
+          example: 41bb953fa782302f4c46755cc2b8e32a00fc5b13
+          type: string
+        qos:
+          example: ""
+          type: string
+        extend:
+          example: ""
+          type: string
+        subdir:
+          example: /path/to/subdir
+          type: string
+      type: object
+    postableVolumeExport:
+      properties:
+        desc:
+          example: default
+          type: string
+        iprange:
+          default: '*'
+          description: |
+            allowed IP format:
+              - any IP address: *
+              - Single IP (dot-decimal): A.B.C.D
+              - IP range (dot-decimal): A.B.C.D-E.F.G.H
+              - IP range (CIDR): A.B.C.D/[0-32]
+          example: 192.168.0.1/24
+          type: string
+        readonly:
+          default: false
+          type: boolean
+        appendonly:
+          default: false
+          type: boolean
+        internalip:
+          default: false
+          type: boolean
+        qos:
+          default: ""
+          description: |
+            qos format: `<put>[:<get>[:<compact>]]`, put, get and compact has the same format `<number>[K|M|G|P|T|Z|E]`, 0 or empty value means unlimited.
+
+            the unit for qos is `B/s`.
+
+            examples:
+            - `10M`, set put to 10MB/s, get and compact to unlimited
+            - `10M:10M`, set put to 10MB/s, get to 10MB/s and compact to unlimited
+            - `1k:1m:10m`, set put to 1KB/s, get to 1MB/s and compact to 10MB/s. the suffix(k, m) is case-insensitive.
+            - `10M:0:10M`, set put to 10MB/s, get to unlimited and compact to 10MB/s
+          example: 10M:10M:10M
+          type: string
+        extend:
+          default: ""
+          type: string
+        subdir:
+          default: /
+          example: /path/to/subdir
+          type: string
+      type: object
+    gettableVolumeQuota:
+      example:
+        path: /dir1/dir2
+        size: 1073741824
+        inodes: 5
+        created: 2000-01-23T04:56:07.000+00:00
+        id: 1
+        used_size: 5242880
+        used_inodes: 3
+        updated: 2000-01-23T04:56:07.000+00:00
+      properties:
+        id:
+          minimum: 1
+          type: integer
+        path:
+          example: /dir1/dir2
+          type: string
+        inodes:
+          example: 5
+          minimum: 0
+          type: integer
+        size:
+          example: 1073741824
+          minimum: 0
+          type: integer
+        used_inodes:
+          example: 3
+          type: integer
+        used_size:
+          example: 5242880
+          type: integer
+        created:
+          format: date-time
+          type: string
+        updated:
+          format: date-time
+          type: string
+      required:
+      - id
+      - inodes
+      - path
+      - size
+      type: object
+    createVolumeQuota:
+      properties:
+        path:
+          description: The directory to be set quota on
+          example: /dir1/dir2
+          type: string
+        inodes:
+          description: "Total inodes, `0` or blank means no limit"
+          example: 100
+          maximum: 4294967295
+          minimum: 0
+          type: integer
+        size:
+          description: "Total size in bytes, `0` or blank means no limit"
+          example: 53687091200
+          minimum: 0
+          type: integer
+      required:
+      - path
+      type: object
+    updateVolumeQuota:
+      properties:
+        path:
+          description: "The directory to be set quota on, it must be equal to the\
+            \ original path if it's provided"
+          example: /dir1/dir2
+          type: string
+        inodes:
+          description: "Total inodes, `0` means no limit"
+          example: 100
+          maximum: 4294967295
+          minimum: 0
+          type: integer
+        size:
+          description: "Total size in bytes, `0` means no limit"
+          example: 53687091200
+          minimum: 0
+          type: integer
+      type: object
+    VolumeKerberosProxy:
+      example:
+        proxy_users: '*'
+        user: user
+        proxy_groups: '*'
+        proxy_hosts: '*'
+      properties:
+        user:
+          type: string
+        proxy_users:
+          default: '*'
+          type: string
+        proxy_groups:
+          default: '*'
+          type: string
+        proxy_hosts:
+          default: '*'
+          type: string
+      required:
+      - user
+      type: object
+    VolumeKerberos:
+      example:
+        supergroup: ""
+        enable: true
+        keytab: ""
+        proxies:
+        - proxy_users: '*'
+          user: user
+          proxy_groups: '*'
+          proxy_hosts: '*'
+        - proxy_users: '*'
+          user: user
+          proxy_groups: '*'
+          proxy_hosts: '*'
+        superuser: ""
+      properties:
+        enable:
+          type: boolean
+        keytab:
+          default: ""
+          type: string
+        superuser:
+          default: ""
+          type: string
+        supergroup:
+          default: ""
+          type: string
+        proxies:
+          items:
+            $ref: '#/components/schemas/VolumeKerberosProxy'
+          type: array
+      required:
+      - enable
+      type: object
+    VolumeRanger:
+      example:
+        enable: true
+        service_name: service_name
+        admin_url: admin_url
+      properties:
+        enable:
+          type: boolean
+        admin_url:
+          type: string
+        service_name:
+          type: string
+      required:
+      - admin_url
+      - enable
+      - service_name
+      type: object
+    FileInfo:
+      example:
+        is_dir: true
+        name: name
+        length: 0
+        nlink: 0
+        type: f
+        mtime: 0
+      properties:
+        name:
+          maxLength: 256
+          type: string
+        is_dir:
+          type: boolean
+        type:
+          description: |
+            - f: file
+            - l: symlink
+            - d: directory
+            - q: fifo
+            - b: block device
+            - c: character device
+            - s: socket
+            - t: trash file
+          enum:
+          - f
+          - l
+          - d
+          - q
+          - b
+          - c
+          - s
+          - t
+          type: string
+        length:
+          minimum: 0
+          type: integer
+        nlink:
+          minimum: 0
+          type: integer
+        mtime:
+          minimum: 0
+          type: integer
+      type: object
+    Inodes:
+      example:
+        inodes:
+        - 1
+        - 1
+      properties:
+        inodes:
+          items:
+            minimum: 1
+            type: integer
+          type: array
+      type: object
+    VolumeClient:
+      example:
+        hostname: node1
+        operations: "{}"
+        openfiles: 0
+        stats: "{}"
+        ip: 172.28.4.5
+        version: 4.7.0
+        mountpoint: /jfs
+      properties:
+        hostname:
+          example: node1
+          type: string
+        ip:
+          example: 172.28.4.5
+          type: string
+        mountpoint:
+          example: /jfs
+          type: string
+        openfiles:
+          minimum: 0
+          type: integer
+        version:
+          example: 4.7.0
+          type: string
+        operations:
+          type: object
+        stats:
+          type: object
+      type: object
+    _metadata_dns_get_200_response:
+      example:
+        ips:
+        - 1.2.3.4
+        - 1.2.3.4
+      properties:
+        ips:
+          description: a list of node IP
+          items:
+            description: Node IP
+            example: 1.2.3.4
+            type: string
+          type: array
+      type: object
+    _volumes__volumeID__get_404_response:
+      example:
+        detail: detail
+      properties:
+        detail:
+          type: string
+      type: object
+    _volumes__volumeID__is_ready_get_200_response:
+      example:
+        is_ready: true
+      properties:
+        is_ready:
+          example: true
+          type: boolean
+      type: object
+    _volumes__volumeID__listDir_get_400_response:
+      example:
+        error: No such file or directory
+      properties:
+        error:
+          example: No such file or directory
+          type: string
+      type: object
+    _volumes__volumeID__listTrash_get_200_response_files_inner:
+      example:
+        inode: 8
+        path: /abc/file.tar.gz
+      properties:
+        inode:
+          example: 8
+          type: integer
+        path:
+          example: /abc/file.tar.gz
+          type: string
+      type: object
+    _volumes__volumeID__listTrash_get_200_response:
+      example:
+        total: 350
+        curPage: 0
+        query: ""
+        totalBytes: 1084227524
+        files:
+        - inode: 8
+          path: /abc/file.tar.gz
+        - inode: 8
+          path: /abc/file.tar.gz
+      properties:
+        total:
+          example: 350
+          type: integer
+        totalBytes:
+          example: 1084227524
+          type: integer
+        query:
+          example: ""
+          type: string
+        curPage:
+          example: 0
+          type: integer
+        files:
+          items:
+            $ref: '#/components/schemas/_volumes__volumeID__listTrash_get_200_response_files_inner'
+          type: array
+      type: object
+    _volumes__volumeID__listTrash_get_400_response:
+      example:
+        error: error
+      properties:
+        error:
+          type: string
+      type: object
+    _volumes__volumeID__quotas__volumeQuotaID__put_400_response:
+      example:
+        non_field_errors:
+        - "Bad quota: `path` cannot be changed in update quota request"
+        - "Bad quota: `path` cannot be changed in update quota request"
+      properties:
+        non_field_errors:
+          items:
+            example: "Bad quota: `path` cannot be changed in update quota request"
+            type: string
+          type: array
+      type: object
+    MetadataInstance_config:
+      example:
+        ANY_CONFIG_KEY: VALUE
+      properties:
+        ANY_CONFIG_KEY:
+          example: VALUE
+          type: string
+      type: object
+    gettableVolume_allOf_access_rules:
+      example:
+        appendonly: false
+        readonly: false
+        iprange: '*'
+        token: d9ae3e863a050e4fd01f3c0a0665e870d305b347
+      properties:
+        iprange:
+          example: '*'
+          type: string
+        token:
+          example: d9ae3e863a050e4fd01f3c0a0665e870d305b347
+          type: string
+        readonly:
+          example: false
+          type: boolean
+        appendonly:
+          example: false
+          type: boolean
+      type: object
