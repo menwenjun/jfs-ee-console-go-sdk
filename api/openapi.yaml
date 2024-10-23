@@ -1251,7 +1251,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/gettableVolumeExport'
+                items:
+                  $ref: '#/components/schemas/gettableVolumeExport'
+                type: array
       summary: Get ACL list
       tags:
       - Volume ACL

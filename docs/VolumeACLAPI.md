@@ -14,7 +14,7 @@ Method | HTTP request | Description
 
 ## VolumesVolumeIDExportsGet
 
-> GettableVolumeExport VolumesVolumeIDExportsGet(ctx, volumeID).Token(token).Execute()
+> []GettableVolumeExport VolumesVolumeIDExportsGet(ctx, volumeID).Token(token).Execute()
 
 Get ACL list
 
@@ -43,7 +43,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `VolumeACLAPI.VolumesVolumeIDExportsGet``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `VolumesVolumeIDExportsGet`: GettableVolumeExport
+	// response from `VolumesVolumeIDExportsGet`: []GettableVolumeExport
 	fmt.Fprintf(os.Stdout, "Response from `VolumeACLAPI.VolumesVolumeIDExportsGet`: %v\n", resp)
 }
 ```
@@ -68,7 +68,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**GettableVolumeExport**](GettableVolumeExport.md)
+[**[]GettableVolumeExport**](GettableVolumeExport.md)
 
 ### Authorization
 
