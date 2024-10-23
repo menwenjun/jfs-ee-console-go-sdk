@@ -38,7 +38,7 @@ func (r ApiVolumesVolumeIDExportsGetRequest) Token(token string) ApiVolumesVolum
 	return r
 }
 
-func (r ApiVolumesVolumeIDExportsGetRequest) Execute() ([]GettableVolumeExport, *http.Response, error) {
+func (r ApiVolumesVolumeIDExportsGetRequest) Execute() (*GettableVolumeExport, *http.Response, error) {
 	return r.ApiService.VolumesVolumeIDExportsGetExecute(r)
 }
 
@@ -60,13 +60,13 @@ func (a *VolumeACLAPIService) VolumesVolumeIDExportsGet(ctx context.Context, vol
 }
 
 // Execute executes the request
-//  @return []GettableVolumeExport
-func (a *VolumeACLAPIService) VolumesVolumeIDExportsGetExecute(r ApiVolumesVolumeIDExportsGetRequest) ([]GettableVolumeExport, *http.Response, error) {
+//  @return GettableVolumeExport
+func (a *VolumeACLAPIService) VolumesVolumeIDExportsGetExecute(r ApiVolumesVolumeIDExportsGetRequest) (*GettableVolumeExport, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodGet
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []GettableVolumeExport
+		localVarReturnValue  *GettableVolumeExport
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VolumeACLAPIService.VolumesVolumeIDExportsGet")
@@ -161,7 +161,7 @@ func (r ApiVolumesVolumeIDExportsPostRequest) PostableVolumeExport(postableVolum
 	return r
 }
 
-func (r ApiVolumesVolumeIDExportsPostRequest) Execute() ([]GettableVolumeExport, *http.Response, error) {
+func (r ApiVolumesVolumeIDExportsPostRequest) Execute() (*GettableVolumeExport, *http.Response, error) {
 	return r.ApiService.VolumesVolumeIDExportsPostExecute(r)
 }
 
@@ -183,13 +183,13 @@ func (a *VolumeACLAPIService) VolumesVolumeIDExportsPost(ctx context.Context, vo
 }
 
 // Execute executes the request
-//  @return []GettableVolumeExport
-func (a *VolumeACLAPIService) VolumesVolumeIDExportsPostExecute(r ApiVolumesVolumeIDExportsPostRequest) ([]GettableVolumeExport, *http.Response, error) {
+//  @return GettableVolumeExport
+func (a *VolumeACLAPIService) VolumesVolumeIDExportsPostExecute(r ApiVolumesVolumeIDExportsPostRequest) (*GettableVolumeExport, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []GettableVolumeExport
+		localVarReturnValue  *GettableVolumeExport
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VolumeACLAPIService.VolumesVolumeIDExportsPost")

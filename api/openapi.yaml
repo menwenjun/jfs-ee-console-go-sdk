@@ -1251,9 +1251,7 @@ paths:
           content:
             application/json:
               schema:
-                items:
-                  $ref: '#/components/schemas/gettableVolumeExport'
-                type: array
+                $ref: '#/components/schemas/gettableVolumeExport'
       summary: Get ACL list
       tags:
       - Volume ACL
@@ -1290,9 +1288,7 @@ paths:
           content:
             application/json:
               schema:
-                items:
-                  $ref: '#/components/schemas/gettableVolumeExport'
-                type: array
+                $ref: '#/components/schemas/gettableVolumeExport'
       summary: Create ACL
       tags:
       - Volume ACL
