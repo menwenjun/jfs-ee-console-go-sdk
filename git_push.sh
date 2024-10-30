@@ -54,4 +54,4 @@ git pull origin main
 
 # Pushes (Forces) the changes in the local repository up to the remote repository
 echo "Git pushing to https://${git_host}/${git_user_id}/${git_repo_id}.git"
-git push origin main 2>&1 | grep -v 'To https'
+git push -f origin main 2>&1 | grep -v 'To https'
