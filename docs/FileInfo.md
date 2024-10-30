@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **Type** | Pointer to **string** | - f: file - l: symlink - d: directory - q: fifo - b: block device - c: character device - s: socket - t: trash file  | [optional] 
 **Length** | Pointer to **int64** |  | [optional] 
 **Nlink** | Pointer to **int32** |  | [optional] 
-**Mtime** | Pointer to **int32** |  | [optional] 
+**Mtime** | Pointer to **int64** |  | [optional] 
 
 ## Methods
 
@@ -157,20 +157,20 @@ HasNlink returns a boolean if a field has been set.
 
 ### GetMtime
 
-`func (o *FileInfo) GetMtime() int32`
+`func (o *FileInfo) GetMtime() int64`
 
 GetMtime returns the Mtime field if non-nil, zero value otherwise.
 
 ### GetMtimeOk
 
-`func (o *FileInfo) GetMtimeOk() (*int32, bool)`
+`func (o *FileInfo) GetMtimeOk() (*int64, bool)`
 
 GetMtimeOk returns a tuple with the Mtime field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMtime
 
-`func (o *FileInfo) SetMtime(v int32)`
+`func (o *FileInfo) SetMtime(v int64)`
 
 SetMtime sets Mtime field to given value.
 

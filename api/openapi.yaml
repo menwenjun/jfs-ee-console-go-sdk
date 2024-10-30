@@ -1488,9 +1488,7 @@ paths:
           content:
             application/json:
               schema:
-                items:
-                  $ref: '#/components/schemas/gettableVolumeQuota'
-                type: array
+                $ref: '#/components/schemas/gettableVolumeQuota'
       summary: Set quota
       tags:
       - Volume quota
@@ -1939,6 +1937,7 @@ components:
         token:
           type: string
         trashtime:
+          format: int64
           minimum: 0
           type: integer
       type: object
@@ -1947,6 +1946,7 @@ components:
         trashtime: 0
       properties:
         trashtime:
+          format: int64
           minimum: 0
           type: integer
       type: object
@@ -2016,6 +2016,7 @@ components:
           minimum: 0
           type: integer
         sizeCap:
+          format: int64
           minimum: 1
           type: integer
         expireAt:
@@ -2042,6 +2043,7 @@ components:
           type: string
         size_cap:
           example: 10240
+          format: int64
           minimum: 1
           type: integer
         license:
@@ -2097,6 +2099,7 @@ components:
             \ in trash remains billable, learn more at <a href=\"https://juicefs.com/docs/cloud/trash\"\
             \ target=\"_blank\">our docs</a>."
           example: 1
+          format: int64
           type: integer
         blockSize:
           default: 4096
@@ -2144,7 +2147,6 @@ components:
             nullable: true
             type: integer
           inodes:
-            format: int64
             nullable: true
             type: integer
           created:
@@ -2365,7 +2367,6 @@ components:
           type: string
         inodes:
           example: 5
-          format: int64
           minimum: 0
           type: integer
         size:
@@ -2375,7 +2376,6 @@ components:
           type: integer
         used_inodes:
           example: 3
-          format: int64
           type: integer
         used_size:
           example: 5242880
@@ -2402,7 +2402,6 @@ components:
         inodes:
           description: "Total inodes, `0` or blank means no limit"
           example: 100
-          format: int64
           maximum: 4294967295
           minimum: 0
           type: integer
@@ -2425,7 +2424,6 @@ components:
         inodes:
           description: "Total inodes, `0` means no limit"
           example: 100
-          format: int64
           maximum: 4294967295
           minimum: 0
           type: integer
@@ -2550,6 +2548,7 @@ components:
           minimum: 0
           type: integer
         mtime:
+          format: int64
           minimum: 0
           type: integer
       type: object
@@ -2561,7 +2560,6 @@ components:
       properties:
         inodes:
           items:
-            format: int64
             minimum: 1
             type: integer
           type: array
@@ -2659,9 +2657,11 @@ components:
       properties:
         total:
           example: 350
+          format: int64
           type: integer
         totalBytes:
           example: 1084227524
+          format: int64
           type: integer
         query:
           example: ""

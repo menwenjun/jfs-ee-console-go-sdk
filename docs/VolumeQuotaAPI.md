@@ -86,7 +86,7 @@ No authorization required
 
 ## VolumesVolumeIDQuotasPost
 
-> []GettableVolumeQuota VolumesVolumeIDQuotasPost(ctx, volumeID).Token(token).CreateVolumeQuota(createVolumeQuota).Execute()
+> GettableVolumeQuota VolumesVolumeIDQuotasPost(ctx, volumeID).Token(token).CreateVolumeQuota(createVolumeQuota).Execute()
 
 Set quota
 
@@ -116,7 +116,7 @@ func main() {
 		fmt.Fprintf(os.Stderr, "Error when calling `VolumeQuotaAPI.VolumesVolumeIDQuotasPost``: %v\n", err)
 		fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
 	}
-	// response from `VolumesVolumeIDQuotasPost`: []GettableVolumeQuota
+	// response from `VolumesVolumeIDQuotasPost`: GettableVolumeQuota
 	fmt.Fprintf(os.Stdout, "Response from `VolumeQuotaAPI.VolumesVolumeIDQuotasPost`: %v\n", resp)
 }
 ```
@@ -142,7 +142,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**[]GettableVolumeQuota**](GettableVolumeQuota.md)
+[**GettableVolumeQuota**](GettableVolumeQuota.md)
 
 ### Authorization
 

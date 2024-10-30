@@ -20,8 +20,8 @@ var _ MappedNullable = &VolumesVolumeIDListTrashGet200Response{}
 
 // VolumesVolumeIDListTrashGet200Response struct for VolumesVolumeIDListTrashGet200Response
 type VolumesVolumeIDListTrashGet200Response struct {
-	Total *int32 `json:"total,omitempty"`
-	TotalBytes *int32 `json:"totalBytes,omitempty"`
+	Total *int64 `json:"total,omitempty"`
+	TotalBytes *int64 `json:"totalBytes,omitempty"`
 	Query *string `json:"query,omitempty"`
 	CurPage *int32 `json:"curPage,omitempty"`
 	Files []VolumesVolumeIDListTrashGet200ResponseFilesInner `json:"files,omitempty"`
@@ -45,9 +45,9 @@ func NewVolumesVolumeIDListTrashGet200ResponseWithDefaults() *VolumesVolumeIDLis
 }
 
 // GetTotal returns the Total field value if set, zero value otherwise.
-func (o *VolumesVolumeIDListTrashGet200Response) GetTotal() int32 {
+func (o *VolumesVolumeIDListTrashGet200Response) GetTotal() int64 {
 	if o == nil || IsNil(o.Total) {
-		var ret int32
+		var ret int64
 		return ret
 	}
 	return *o.Total
@@ -55,7 +55,7 @@ func (o *VolumesVolumeIDListTrashGet200Response) GetTotal() int32 {
 
 // GetTotalOk returns a tuple with the Total field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *VolumesVolumeIDListTrashGet200Response) GetTotalOk() (*int32, bool) {
+func (o *VolumesVolumeIDListTrashGet200Response) GetTotalOk() (*int64, bool) {
 	if o == nil || IsNil(o.Total) {
 		return nil, false
 	}
@@ -71,15 +71,15 @@ func (o *VolumesVolumeIDListTrashGet200Response) HasTotal() bool {
 	return false
 }
 
-// SetTotal gets a reference to the given int32 and assigns it to the Total field.
-func (o *VolumesVolumeIDListTrashGet200Response) SetTotal(v int32) {
+// SetTotal gets a reference to the given int64 and assigns it to the Total field.
+func (o *VolumesVolumeIDListTrashGet200Response) SetTotal(v int64) {
 	o.Total = &v
 }
 
 // GetTotalBytes returns the TotalBytes field value if set, zero value otherwise.
-func (o *VolumesVolumeIDListTrashGet200Response) GetTotalBytes() int32 {
+func (o *VolumesVolumeIDListTrashGet200Response) GetTotalBytes() int64 {
 	if o == nil || IsNil(o.TotalBytes) {
-		var ret int32
+		var ret int64
 		return ret
 	}
 	return *o.TotalBytes
@@ -87,7 +87,7 @@ func (o *VolumesVolumeIDListTrashGet200Response) GetTotalBytes() int32 {
 
 // GetTotalBytesOk returns a tuple with the TotalBytes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *VolumesVolumeIDListTrashGet200Response) GetTotalBytesOk() (*int32, bool) {
+func (o *VolumesVolumeIDListTrashGet200Response) GetTotalBytesOk() (*int64, bool) {
 	if o == nil || IsNil(o.TotalBytes) {
 		return nil, false
 	}
@@ -103,8 +103,8 @@ func (o *VolumesVolumeIDListTrashGet200Response) HasTotalBytes() bool {
 	return false
 }
 
-// SetTotalBytes gets a reference to the given int32 and assigns it to the TotalBytes field.
-func (o *VolumesVolumeIDListTrashGet200Response) SetTotalBytes(v int32) {
+// SetTotalBytes gets a reference to the given int64 and assigns it to the TotalBytes field.
+func (o *VolumesVolumeIDListTrashGet200Response) SetTotalBytes(v int64) {
 	o.TotalBytes = &v
 }
 

@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **Desp** | Pointer to **string** |  | [optional] 
 **Owner** | Pointer to **int32** |  | [optional] 
 **Token** | Pointer to **string** |  | [optional] 
-**Trashtime** | Pointer to **int32** |  | [optional] 
+**Trashtime** | Pointer to **int64** |  | [optional] 
 
 ## Methods
 
@@ -183,20 +183,20 @@ HasToken returns a boolean if a field has been set.
 
 ### GetTrashtime
 
-`func (o *Region) GetTrashtime() int32`
+`func (o *Region) GetTrashtime() int64`
 
 GetTrashtime returns the Trashtime field if non-nil, zero value otherwise.
 
 ### GetTrashtimeOk
 
-`func (o *Region) GetTrashtimeOk() (*int32, bool)`
+`func (o *Region) GetTrashtimeOk() (*int64, bool)`
 
 GetTrashtimeOk returns a tuple with the Trashtime field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTrashtime
 
-`func (o *Region) SetTrashtime(v int32)`
+`func (o *Region) SetTrashtime(v int64)`
 
 SetTrashtime sets Trashtime field to given value.
 

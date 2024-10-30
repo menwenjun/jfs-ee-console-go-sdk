@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Inodes** | Pointer to **[]int64** |  | [optional] 
+**Inodes** | Pointer to **[]int32** |  | [optional] 
 
 ## Methods
 
@@ -27,20 +27,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetInodes
 
-`func (o *Inodes) GetInodes() []int64`
+`func (o *Inodes) GetInodes() []int32`
 
 GetInodes returns the Inodes field if non-nil, zero value otherwise.
 
 ### GetInodesOk
 
-`func (o *Inodes) GetInodesOk() (*[]int64, bool)`
+`func (o *Inodes) GetInodesOk() (*[]int32, bool)`
 
 GetInodesOk returns a tuple with the Inodes field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetInodes
 
-`func (o *Inodes) SetInodes(v []int64)`
+`func (o *Inodes) SetInodes(v []int32)`
 
 SetInodes sets Inodes field to given value.
 

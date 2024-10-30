@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Dns** | Pointer to **string** |  | [optional] 
 **ExpiredAt** | Pointer to **time.Time** |  | [optional] 
-**SizeCap** | Pointer to **int32** |  | [optional] 
+**SizeCap** | Pointer to **int64** |  | [optional] 
 **License** | Pointer to **string** |  | [optional] 
 
 ## Methods
@@ -80,20 +80,20 @@ HasExpiredAt returns a boolean if a field has been set.
 
 ### GetSizeCap
 
-`func (o *MetadataLicense) GetSizeCap() int32`
+`func (o *MetadataLicense) GetSizeCap() int64`
 
 GetSizeCap returns the SizeCap field if non-nil, zero value otherwise.
 
 ### GetSizeCapOk
 
-`func (o *MetadataLicense) GetSizeCapOk() (*int32, bool)`
+`func (o *MetadataLicense) GetSizeCapOk() (*int64, bool)`
 
 GetSizeCapOk returns a tuple with the SizeCap field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSizeCap
 
-`func (o *MetadataLicense) SetSizeCap(v int32)`
+`func (o *MetadataLicense) SetSizeCap(v int64)`
 
 SetSizeCap sets SizeCap field to given value.
 

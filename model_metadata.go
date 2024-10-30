@@ -27,7 +27,7 @@ type Metadata struct {
 	Region *int32 `json:"region,omitempty"`
 	Parent NullableInt32 `json:"parent,omitempty"`
 	Zoneid *int32 `json:"zoneid,omitempty"`
-	SizeCap *int32 `json:"sizeCap,omitempty"`
+	SizeCap *int64 `json:"sizeCap,omitempty"`
 	ExpireAt NullableTime `json:"expireAt,omitempty"`
 	InstanceSet []int32 `json:"instance_set,omitempty"`
 }
@@ -252,9 +252,9 @@ func (o *Metadata) SetZoneid(v int32) {
 }
 
 // GetSizeCap returns the SizeCap field value if set, zero value otherwise.
-func (o *Metadata) GetSizeCap() int32 {
+func (o *Metadata) GetSizeCap() int64 {
 	if o == nil || IsNil(o.SizeCap) {
-		var ret int32
+		var ret int64
 		return ret
 	}
 	return *o.SizeCap
@@ -262,7 +262,7 @@ func (o *Metadata) GetSizeCap() int32 {
 
 // GetSizeCapOk returns a tuple with the SizeCap field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Metadata) GetSizeCapOk() (*int32, bool) {
+func (o *Metadata) GetSizeCapOk() (*int64, bool) {
 	if o == nil || IsNil(o.SizeCap) {
 		return nil, false
 	}
@@ -278,8 +278,8 @@ func (o *Metadata) HasSizeCap() bool {
 	return false
 }
 
-// SetSizeCap gets a reference to the given int32 and assigns it to the SizeCap field.
-func (o *Metadata) SetSizeCap(v int32) {
+// SetSizeCap gets a reference to the given int64 and assigns it to the SizeCap field.
+func (o *Metadata) SetSizeCap(v int64) {
 	o.SizeCap = &v
 }
 

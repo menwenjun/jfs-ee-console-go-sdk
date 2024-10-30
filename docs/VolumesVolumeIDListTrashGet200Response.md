@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Total** | Pointer to **int32** |  | [optional] 
-**TotalBytes** | Pointer to **int32** |  | [optional] 
+**Total** | Pointer to **int64** |  | [optional] 
+**TotalBytes** | Pointer to **int64** |  | [optional] 
 **Query** | Pointer to **string** |  | [optional] 
 **CurPage** | Pointer to **int32** |  | [optional] 
 **Files** | Pointer to [**[]VolumesVolumeIDListTrashGet200ResponseFilesInner**](VolumesVolumeIDListTrashGet200ResponseFilesInner.md) |  | [optional] 
@@ -31,20 +31,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetTotal
 
-`func (o *VolumesVolumeIDListTrashGet200Response) GetTotal() int32`
+`func (o *VolumesVolumeIDListTrashGet200Response) GetTotal() int64`
 
 GetTotal returns the Total field if non-nil, zero value otherwise.
 
 ### GetTotalOk
 
-`func (o *VolumesVolumeIDListTrashGet200Response) GetTotalOk() (*int32, bool)`
+`func (o *VolumesVolumeIDListTrashGet200Response) GetTotalOk() (*int64, bool)`
 
 GetTotalOk returns a tuple with the Total field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTotal
 
-`func (o *VolumesVolumeIDListTrashGet200Response) SetTotal(v int32)`
+`func (o *VolumesVolumeIDListTrashGet200Response) SetTotal(v int64)`
 
 SetTotal sets Total field to given value.
 
@@ -56,20 +56,20 @@ HasTotal returns a boolean if a field has been set.
 
 ### GetTotalBytes
 
-`func (o *VolumesVolumeIDListTrashGet200Response) GetTotalBytes() int32`
+`func (o *VolumesVolumeIDListTrashGet200Response) GetTotalBytes() int64`
 
 GetTotalBytes returns the TotalBytes field if non-nil, zero value otherwise.
 
 ### GetTotalBytesOk
 
-`func (o *VolumesVolumeIDListTrashGet200Response) GetTotalBytesOk() (*int32, bool)`
+`func (o *VolumesVolumeIDListTrashGet200Response) GetTotalBytesOk() (*int64, bool)`
 
 GetTotalBytesOk returns a tuple with the TotalBytes field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTotalBytes
 
-`func (o *VolumesVolumeIDListTrashGet200Response) SetTotalBytes(v int32)`
+`func (o *VolumesVolumeIDListTrashGet200Response) SetTotalBytes(v int64)`
 
 SetTotalBytes sets TotalBytes field to given value.
 

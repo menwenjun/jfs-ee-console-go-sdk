@@ -23,7 +23,7 @@ var _ MappedNullable = &MetadataLicense{}
 type MetadataLicense struct {
 	Dns *string `json:"dns,omitempty"`
 	ExpiredAt *time.Time `json:"expired_at,omitempty"`
-	SizeCap *int32 `json:"size_cap,omitempty"`
+	SizeCap *int64 `json:"size_cap,omitempty"`
 	License *string `json:"license,omitempty"`
 }
 
@@ -109,9 +109,9 @@ func (o *MetadataLicense) SetExpiredAt(v time.Time) {
 }
 
 // GetSizeCap returns the SizeCap field value if set, zero value otherwise.
-func (o *MetadataLicense) GetSizeCap() int32 {
+func (o *MetadataLicense) GetSizeCap() int64 {
 	if o == nil || IsNil(o.SizeCap) {
-		var ret int32
+		var ret int64
 		return ret
 	}
 	return *o.SizeCap
@@ -119,7 +119,7 @@ func (o *MetadataLicense) GetSizeCap() int32 {
 
 // GetSizeCapOk returns a tuple with the SizeCap field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *MetadataLicense) GetSizeCapOk() (*int32, bool) {
+func (o *MetadataLicense) GetSizeCapOk() (*int64, bool) {
 	if o == nil || IsNil(o.SizeCap) {
 		return nil, false
 	}
@@ -135,8 +135,8 @@ func (o *MetadataLicense) HasSizeCap() bool {
 	return false
 }
 
-// SetSizeCap gets a reference to the given int32 and assigns it to the SizeCap field.
-func (o *MetadataLicense) SetSizeCap(v int32) {
+// SetSizeCap gets a reference to the given int64 and assigns it to the SizeCap field.
+func (o *MetadataLicense) SetSizeCap(v int64) {
 	o.SizeCap = &v
 }
 

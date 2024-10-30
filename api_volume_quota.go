@@ -161,7 +161,7 @@ func (r ApiVolumesVolumeIDQuotasPostRequest) CreateVolumeQuota(createVolumeQuota
 	return r
 }
 
-func (r ApiVolumesVolumeIDQuotasPostRequest) Execute() ([]GettableVolumeQuota, *http.Response, error) {
+func (r ApiVolumesVolumeIDQuotasPostRequest) Execute() (*GettableVolumeQuota, *http.Response, error) {
 	return r.ApiService.VolumesVolumeIDQuotasPostExecute(r)
 }
 
@@ -183,13 +183,13 @@ func (a *VolumeQuotaAPIService) VolumesVolumeIDQuotasPost(ctx context.Context, v
 }
 
 // Execute executes the request
-//  @return []GettableVolumeQuota
-func (a *VolumeQuotaAPIService) VolumesVolumeIDQuotasPostExecute(r ApiVolumesVolumeIDQuotasPostRequest) ([]GettableVolumeQuota, *http.Response, error) {
+//  @return GettableVolumeQuota
+func (a *VolumeQuotaAPIService) VolumesVolumeIDQuotasPostExecute(r ApiVolumesVolumeIDQuotasPostRequest) (*GettableVolumeQuota, *http.Response, error) {
 	var (
 		localVarHTTPMethod   = http.MethodPost
 		localVarPostBody     interface{}
 		formFiles            []formFile
-		localVarReturnValue  []GettableVolumeQuota
+		localVarReturnValue  *GettableVolumeQuota
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "VolumeQuotaAPIService.VolumesVolumeIDQuotasPost")

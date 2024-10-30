@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** |  | [optional] 
 **Region** | Pointer to **int32** |  | [optional] 
 **Bucket** | Pointer to **string** |  | [optional] [default to "juicefs-<Volume name>"]
-**Trashtime** | Pointer to **int32** | Days to keep deleted files, set to zero to disable. Files in trash remains billable, learn more at &lt;a href&#x3D;\&quot;https://juicefs.com/docs/cloud/trash\&quot; target&#x3D;\&quot;_blank\&quot;&gt;our docs&lt;/a&gt;. | [optional] 
+**Trashtime** | Pointer to **int64** | Days to keep deleted files, set to zero to disable. Files in trash remains billable, learn more at &lt;a href&#x3D;\&quot;https://juicefs.com/docs/cloud/trash\&quot; target&#x3D;\&quot;_blank\&quot;&gt;our docs&lt;/a&gt;. | [optional] 
 **BlockSize** | Pointer to **int32** |  | [optional] [default to 4096]
 **Compress** | Pointer to **string** |  | [optional] [default to "lz4"]
 **Compatible** | Pointer to **bool** |  | [optional] [default to false]
@@ -110,20 +110,20 @@ HasBucket returns a boolean if a field has been set.
 
 ### GetTrashtime
 
-`func (o *Volume) GetTrashtime() int32`
+`func (o *Volume) GetTrashtime() int64`
 
 GetTrashtime returns the Trashtime field if non-nil, zero value otherwise.
 
 ### GetTrashtimeOk
 
-`func (o *Volume) GetTrashtimeOk() (*int32, bool)`
+`func (o *Volume) GetTrashtimeOk() (*int64, bool)`
 
 GetTrashtimeOk returns a tuple with the Trashtime field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTrashtime
 
-`func (o *Volume) SetTrashtime(v int32)`
+`func (o *Volume) SetTrashtime(v int64)`
 
 SetTrashtime sets Trashtime field to given value.
 

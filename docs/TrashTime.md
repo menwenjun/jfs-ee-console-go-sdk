@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Trashtime** | Pointer to **int32** |  | [optional] 
+**Trashtime** | Pointer to **int64** |  | [optional] 
 
 ## Methods
 
@@ -27,20 +27,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetTrashtime
 
-`func (o *TrashTime) GetTrashtime() int32`
+`func (o *TrashTime) GetTrashtime() int64`
 
 GetTrashtime returns the Trashtime field if non-nil, zero value otherwise.
 
 ### GetTrashtimeOk
 
-`func (o *TrashTime) GetTrashtimeOk() (*int32, bool)`
+`func (o *TrashTime) GetTrashtimeOk() (*int64, bool)`
 
 GetTrashtimeOk returns a tuple with the Trashtime field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTrashtime
 
-`func (o *TrashTime) SetTrashtime(v int32)`
+`func (o *TrashTime) SetTrashtime(v int64)`
 
 SetTrashtime sets Trashtime field to given value.
 

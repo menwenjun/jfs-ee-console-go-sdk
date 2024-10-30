@@ -20,7 +20,7 @@ var _ MappedNullable = &TrashTime{}
 
 // TrashTime struct for TrashTime
 type TrashTime struct {
-	Trashtime *int32 `json:"trashtime,omitempty"`
+	Trashtime *int64 `json:"trashtime,omitempty"`
 }
 
 // NewTrashTime instantiates a new TrashTime object
@@ -41,9 +41,9 @@ func NewTrashTimeWithDefaults() *TrashTime {
 }
 
 // GetTrashtime returns the Trashtime field value if set, zero value otherwise.
-func (o *TrashTime) GetTrashtime() int32 {
+func (o *TrashTime) GetTrashtime() int64 {
 	if o == nil || IsNil(o.Trashtime) {
-		var ret int32
+		var ret int64
 		return ret
 	}
 	return *o.Trashtime
@@ -51,7 +51,7 @@ func (o *TrashTime) GetTrashtime() int32 {
 
 // GetTrashtimeOk returns a tuple with the Trashtime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TrashTime) GetTrashtimeOk() (*int32, bool) {
+func (o *TrashTime) GetTrashtimeOk() (*int64, bool) {
 	if o == nil || IsNil(o.Trashtime) {
 		return nil, false
 	}
@@ -67,8 +67,8 @@ func (o *TrashTime) HasTrashtime() bool {
 	return false
 }
 
-// SetTrashtime gets a reference to the given int32 and assigns it to the Trashtime field.
-func (o *TrashTime) SetTrashtime(v int32) {
+// SetTrashtime gets a reference to the given int64 and assigns it to the Trashtime field.
+func (o *TrashTime) SetTrashtime(v int64) {
 	o.Trashtime = &v
 }
 

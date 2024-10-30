@@ -26,7 +26,7 @@ type FileInfo struct {
 	Type *string `json:"type,omitempty"`
 	Length *int64 `json:"length,omitempty"`
 	Nlink *int32 `json:"nlink,omitempty"`
-	Mtime *int32 `json:"mtime,omitempty"`
+	Mtime *int64 `json:"mtime,omitempty"`
 }
 
 // NewFileInfo instantiates a new FileInfo object
@@ -207,9 +207,9 @@ func (o *FileInfo) SetNlink(v int32) {
 }
 
 // GetMtime returns the Mtime field value if set, zero value otherwise.
-func (o *FileInfo) GetMtime() int32 {
+func (o *FileInfo) GetMtime() int64 {
 	if o == nil || IsNil(o.Mtime) {
-		var ret int32
+		var ret int64
 		return ret
 	}
 	return *o.Mtime
@@ -217,7 +217,7 @@ func (o *FileInfo) GetMtime() int32 {
 
 // GetMtimeOk returns a tuple with the Mtime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *FileInfo) GetMtimeOk() (*int32, bool) {
+func (o *FileInfo) GetMtimeOk() (*int64, bool) {
 	if o == nil || IsNil(o.Mtime) {
 		return nil, false
 	}
@@ -233,8 +233,8 @@ func (o *FileInfo) HasMtime() bool {
 	return false
 }
 
-// SetMtime gets a reference to the given int32 and assigns it to the Mtime field.
-func (o *FileInfo) SetMtime(v int32) {
+// SetMtime gets a reference to the given int64 and assigns it to the Mtime field.
+func (o *FileInfo) SetMtime(v int64) {
 	o.Mtime = &v
 }
 

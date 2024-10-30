@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **Region** | Pointer to **int32** |  | [optional] 
 **Parent** | Pointer to **NullableInt32** |  | [optional] 
 **Zoneid** | Pointer to **int32** |  | [optional] 
-**SizeCap** | Pointer to **int32** |  | [optional] 
+**SizeCap** | Pointer to **int64** |  | [optional] 
 **ExpireAt** | Pointer to **NullableTime** |  | [optional] 
 **InstanceSet** | Pointer to **[]int32** |  | [optional] 
 
@@ -195,20 +195,20 @@ HasZoneid returns a boolean if a field has been set.
 
 ### GetSizeCap
 
-`func (o *Metadata) GetSizeCap() int32`
+`func (o *Metadata) GetSizeCap() int64`
 
 GetSizeCap returns the SizeCap field if non-nil, zero value otherwise.
 
 ### GetSizeCapOk
 
-`func (o *Metadata) GetSizeCapOk() (*int32, bool)`
+`func (o *Metadata) GetSizeCapOk() (*int64, bool)`
 
 GetSizeCapOk returns a tuple with the SizeCap field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSizeCap
 
-`func (o *Metadata) SetSizeCap(v int32)`
+`func (o *Metadata) SetSizeCap(v int64)`
 
 SetSizeCap sets SizeCap field to given value.
 

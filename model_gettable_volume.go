@@ -25,7 +25,7 @@ type GettableVolume struct {
 	Region *int32 `json:"region,omitempty"`
 	Bucket *string `json:"bucket,omitempty"`
 	// Days to keep deleted files, set to zero to disable. Files in trash remains billable, learn more at <a href=\"https://juicefs.com/docs/cloud/trash\" target=\"_blank\">our docs</a>.
-	Trashtime *int32 `json:"trashtime,omitempty"`
+	Trashtime *int64 `json:"trashtime,omitempty"`
 	BlockSize *int32 `json:"blockSize,omitempty"`
 	Compress *string `json:"compress,omitempty"`
 	Compatible *bool `json:"compatible,omitempty"`
@@ -35,7 +35,7 @@ type GettableVolume struct {
 	AccessRules []GettableVolumeAllOfAccessRules `json:"access_rules,omitempty"`
 	Owner *int32 `json:"owner,omitempty"`
 	Size NullableInt64 `json:"size,omitempty"`
-	Inodes NullableInt64 `json:"inodes,omitempty"`
+	Inodes NullableInt32 `json:"inodes,omitempty"`
 	Created *time.Time `json:"created,omitempty"`
 	Uuid *string `json:"uuid,omitempty"`
 }
@@ -170,9 +170,9 @@ func (o *GettableVolume) SetBucket(v string) {
 }
 
 // GetTrashtime returns the Trashtime field value if set, zero value otherwise.
-func (o *GettableVolume) GetTrashtime() int32 {
+func (o *GettableVolume) GetTrashtime() int64 {
 	if o == nil || IsNil(o.Trashtime) {
-		var ret int32
+		var ret int64
 		return ret
 	}
 	return *o.Trashtime
@@ -180,7 +180,7 @@ func (o *GettableVolume) GetTrashtime() int32 {
 
 // GetTrashtimeOk returns a tuple with the Trashtime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GettableVolume) GetTrashtimeOk() (*int32, bool) {
+func (o *GettableVolume) GetTrashtimeOk() (*int64, bool) {
 	if o == nil || IsNil(o.Trashtime) {
 		return nil, false
 	}
@@ -196,8 +196,8 @@ func (o *GettableVolume) HasTrashtime() bool {
 	return false
 }
 
-// SetTrashtime gets a reference to the given int32 and assigns it to the Trashtime field.
-func (o *GettableVolume) SetTrashtime(v int32) {
+// SetTrashtime gets a reference to the given int64 and assigns it to the Trashtime field.
+func (o *GettableVolume) SetTrashtime(v int64) {
 	o.Trashtime = &v
 }
 
@@ -510,9 +510,9 @@ func (o *GettableVolume) UnsetSize() {
 }
 
 // GetInodes returns the Inodes field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *GettableVolume) GetInodes() int64 {
+func (o *GettableVolume) GetInodes() int32 {
 	if o == nil || IsNil(o.Inodes.Get()) {
-		var ret int64
+		var ret int32
 		return ret
 	}
 	return *o.Inodes.Get()
@@ -521,7 +521,7 @@ func (o *GettableVolume) GetInodes() int64 {
 // GetInodesOk returns a tuple with the Inodes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *GettableVolume) GetInodesOk() (*int64, bool) {
+func (o *GettableVolume) GetInodesOk() (*int32, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -537,8 +537,8 @@ func (o *GettableVolume) HasInodes() bool {
 	return false
 }
 
-// SetInodes gets a reference to the given NullableInt64 and assigns it to the Inodes field.
-func (o *GettableVolume) SetInodes(v int64) {
+// SetInodes gets a reference to the given NullableInt32 and assigns it to the Inodes field.
+func (o *GettableVolume) SetInodes(v int32) {
 	o.Inodes.Set(&v)
 }
 // SetInodesNil sets the value for Inodes to be an explicit nil

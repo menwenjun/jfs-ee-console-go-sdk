@@ -26,7 +26,7 @@ type PostableVolume struct {
 	Region int32 `json:"region"`
 	Bucket *string `json:"bucket,omitempty"`
 	// Days to keep deleted files, set to zero to disable. Files in trash remains billable, learn more at <a href=\"https://juicefs.com/docs/cloud/trash\" target=\"_blank\">our docs</a>.
-	Trashtime *int32 `json:"trashtime,omitempty"`
+	Trashtime *int64 `json:"trashtime,omitempty"`
 	BlockSize *int32 `json:"blockSize,omitempty"`
 	Compress *string `json:"compress,omitempty"`
 	Compatible *bool `json:"compatible,omitempty"`
@@ -152,9 +152,9 @@ func (o *PostableVolume) SetBucket(v string) {
 }
 
 // GetTrashtime returns the Trashtime field value if set, zero value otherwise.
-func (o *PostableVolume) GetTrashtime() int32 {
+func (o *PostableVolume) GetTrashtime() int64 {
 	if o == nil || IsNil(o.Trashtime) {
-		var ret int32
+		var ret int64
 		return ret
 	}
 	return *o.Trashtime
@@ -162,7 +162,7 @@ func (o *PostableVolume) GetTrashtime() int32 {
 
 // GetTrashtimeOk returns a tuple with the Trashtime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PostableVolume) GetTrashtimeOk() (*int32, bool) {
+func (o *PostableVolume) GetTrashtimeOk() (*int64, bool) {
 	if o == nil || IsNil(o.Trashtime) {
 		return nil, false
 	}
@@ -178,8 +178,8 @@ func (o *PostableVolume) HasTrashtime() bool {
 	return false
 }
 
-// SetTrashtime gets a reference to the given int32 and assigns it to the Trashtime field.
-func (o *PostableVolume) SetTrashtime(v int32) {
+// SetTrashtime gets a reference to the given int64 and assigns it to the Trashtime field.
+func (o *PostableVolume) SetTrashtime(v int64) {
 	o.Trashtime = &v
 }
 

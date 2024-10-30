@@ -26,7 +26,7 @@ type Region struct {
 	Desp *string `json:"desp,omitempty"`
 	Owner *int32 `json:"owner,omitempty"`
 	Token *string `json:"token,omitempty"`
-	Trashtime *int32 `json:"trashtime,omitempty"`
+	Trashtime *int64 `json:"trashtime,omitempty"`
 }
 
 // NewRegion instantiates a new Region object
@@ -239,9 +239,9 @@ func (o *Region) SetToken(v string) {
 }
 
 // GetTrashtime returns the Trashtime field value if set, zero value otherwise.
-func (o *Region) GetTrashtime() int32 {
+func (o *Region) GetTrashtime() int64 {
 	if o == nil || IsNil(o.Trashtime) {
-		var ret int32
+		var ret int64
 		return ret
 	}
 	return *o.Trashtime
@@ -249,7 +249,7 @@ func (o *Region) GetTrashtime() int32 {
 
 // GetTrashtimeOk returns a tuple with the Trashtime field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Region) GetTrashtimeOk() (*int32, bool) {
+func (o *Region) GetTrashtimeOk() (*int64, bool) {
 	if o == nil || IsNil(o.Trashtime) {
 		return nil, false
 	}
@@ -265,8 +265,8 @@ func (o *Region) HasTrashtime() bool {
 	return false
 }
 
-// SetTrashtime gets a reference to the given int32 and assigns it to the Trashtime field.
-func (o *Region) SetTrashtime(v int32) {
+// SetTrashtime gets a reference to the given int64 and assigns it to the Trashtime field.
+func (o *Region) SetTrashtime(v int64) {
 	o.Trashtime = &v
 }
 

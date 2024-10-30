@@ -6,9 +6,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Id** | **int32** |  | 
 **Path** | **string** |  | 
-**Inodes** | **int64** |  | 
+**Inodes** | **int32** |  | 
 **Size** | **int64** |  | 
-**UsedInodes** | Pointer to **int64** |  | [optional] 
+**UsedInodes** | Pointer to **int32** |  | [optional] 
 **UsedSize** | Pointer to **int64** |  | [optional] 
 **Created** | Pointer to **time.Time** |  | [optional] 
 **Updated** | Pointer to **time.Time** |  | [optional] 
@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 
 ### NewGettableVolumeQuota
 
-`func NewGettableVolumeQuota(id int32, path string, inodes int64, size int64, ) *GettableVolumeQuota`
+`func NewGettableVolumeQuota(id int32, path string, inodes int32, size int64, ) *GettableVolumeQuota`
 
 NewGettableVolumeQuota instantiates a new GettableVolumeQuota object
 This constructor will assign default values to properties that have it defined,
@@ -74,20 +74,20 @@ SetPath sets Path field to given value.
 
 ### GetInodes
 
-`func (o *GettableVolumeQuota) GetInodes() int64`
+`func (o *GettableVolumeQuota) GetInodes() int32`
 
 GetInodes returns the Inodes field if non-nil, zero value otherwise.
 
 ### GetInodesOk
 
-`func (o *GettableVolumeQuota) GetInodesOk() (*int64, bool)`
+`func (o *GettableVolumeQuota) GetInodesOk() (*int32, bool)`
 
 GetInodesOk returns a tuple with the Inodes field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetInodes
 
-`func (o *GettableVolumeQuota) SetInodes(v int64)`
+`func (o *GettableVolumeQuota) SetInodes(v int32)`
 
 SetInodes sets Inodes field to given value.
 
@@ -114,20 +114,20 @@ SetSize sets Size field to given value.
 
 ### GetUsedInodes
 
-`func (o *GettableVolumeQuota) GetUsedInodes() int64`
+`func (o *GettableVolumeQuota) GetUsedInodes() int32`
 
 GetUsedInodes returns the UsedInodes field if non-nil, zero value otherwise.
 
 ### GetUsedInodesOk
 
-`func (o *GettableVolumeQuota) GetUsedInodesOk() (*int64, bool)`
+`func (o *GettableVolumeQuota) GetUsedInodesOk() (*int32, bool)`
 
 GetUsedInodesOk returns a tuple with the UsedInodes field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetUsedInodes
 
-`func (o *GettableVolumeQuota) SetUsedInodes(v int64)`
+`func (o *GettableVolumeQuota) SetUsedInodes(v int32)`
 
 SetUsedInodes sets UsedInodes field to given value.
 

@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Name** | Pointer to **string** |  | [optional] 
 **Region** | Pointer to **int32** |  | [optional] 
 **Bucket** | Pointer to **string** |  | [optional] [default to "juicefs-<Volume name>"]
-**Trashtime** | Pointer to **int32** | Days to keep deleted files, set to zero to disable. Files in trash remains billable, learn more at &lt;a href&#x3D;\&quot;https://juicefs.com/docs/cloud/trash\&quot; target&#x3D;\&quot;_blank\&quot;&gt;our docs&lt;/a&gt;. | [optional] 
+**Trashtime** | Pointer to **int64** | Days to keep deleted files, set to zero to disable. Files in trash remains billable, learn more at &lt;a href&#x3D;\&quot;https://juicefs.com/docs/cloud/trash\&quot; target&#x3D;\&quot;_blank\&quot;&gt;our docs&lt;/a&gt;. | [optional] 
 **BlockSize** | Pointer to **int32** |  | [optional] [default to 4096]
 **Compress** | Pointer to **string** |  | [optional] [default to "lz4"]
 **Compatible** | Pointer to **bool** |  | [optional] [default to false]
@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 **AccessRules** | Pointer to [**[]GettableVolumeAllOfAccessRules**](GettableVolumeAllOfAccessRules.md) |  | [optional] 
 **Owner** | Pointer to **int32** |  | [optional] 
 **Size** | Pointer to **NullableInt64** |  | [optional] 
-**Inodes** | Pointer to **NullableInt64** |  | [optional] 
+**Inodes** | Pointer to **NullableInt32** |  | [optional] 
 **Created** | Pointer to **time.Time** |  | [optional] 
 **Uuid** | Pointer to **string** |  | [optional] 
 
@@ -117,20 +117,20 @@ HasBucket returns a boolean if a field has been set.
 
 ### GetTrashtime
 
-`func (o *GettableVolume) GetTrashtime() int32`
+`func (o *GettableVolume) GetTrashtime() int64`
 
 GetTrashtime returns the Trashtime field if non-nil, zero value otherwise.
 
 ### GetTrashtimeOk
 
-`func (o *GettableVolume) GetTrashtimeOk() (*int32, bool)`
+`func (o *GettableVolume) GetTrashtimeOk() (*int64, bool)`
 
 GetTrashtimeOk returns a tuple with the Trashtime field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTrashtime
 
-`func (o *GettableVolume) SetTrashtime(v int32)`
+`func (o *GettableVolume) SetTrashtime(v int64)`
 
 SetTrashtime sets Trashtime field to given value.
 
@@ -387,20 +387,20 @@ HasSize returns a boolean if a field has been set.
 UnsetSize ensures that no value is present for Size, not even an explicit nil
 ### GetInodes
 
-`func (o *GettableVolume) GetInodes() int64`
+`func (o *GettableVolume) GetInodes() int32`
 
 GetInodes returns the Inodes field if non-nil, zero value otherwise.
 
 ### GetInodesOk
 
-`func (o *GettableVolume) GetInodesOk() (*int64, bool)`
+`func (o *GettableVolume) GetInodesOk() (*int32, bool)`
 
 GetInodesOk returns a tuple with the Inodes field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetInodes
 
-`func (o *GettableVolume) SetInodes(v int64)`
+`func (o *GettableVolume) SetInodes(v int32)`
 
 SetInodes sets Inodes field to given value.
 
