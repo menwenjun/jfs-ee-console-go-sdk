@@ -2147,6 +2147,7 @@ components:
             nullable: true
             type: integer
           inodes:
+            format: int64
             nullable: true
             type: integer
           created:
@@ -2367,6 +2368,7 @@ components:
           type: string
         inodes:
           example: 5
+          format: int64
           minimum: 0
           type: integer
         size:
@@ -2376,6 +2378,7 @@ components:
           type: integer
         used_inodes:
           example: 3
+          format: int64
           type: integer
         used_size:
           example: 5242880
@@ -2402,6 +2405,7 @@ components:
         inodes:
           description: "Total inodes, `0` or blank means no limit"
           example: 100
+          format: int64
           maximum: 4294967295
           minimum: 0
           type: integer
@@ -2424,6 +2428,7 @@ components:
         inodes:
           description: "Total inodes, `0` means no limit"
           example: 100
+          format: int64
           maximum: 4294967295
           minimum: 0
           type: integer

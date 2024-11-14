@@ -25,9 +25,9 @@ var _ MappedNullable = &GettableVolumeQuota{}
 type GettableVolumeQuota struct {
 	Id int32 `json:"id"`
 	Path string `json:"path"`
-	Inodes int32 `json:"inodes"`
+	Inodes int64 `json:"inodes"`
 	Size int64 `json:"size"`
-	UsedInodes *int32 `json:"used_inodes,omitempty"`
+	UsedInodes *int64 `json:"used_inodes,omitempty"`
 	UsedSize *int64 `json:"used_size,omitempty"`
 	Created *time.Time `json:"created,omitempty"`
 	Updated *time.Time `json:"updated,omitempty"`
@@ -39,7 +39,7 @@ type _GettableVolumeQuota GettableVolumeQuota
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGettableVolumeQuota(id int32, path string, inodes int32, size int64) *GettableVolumeQuota {
+func NewGettableVolumeQuota(id int32, path string, inodes int64, size int64) *GettableVolumeQuota {
 	this := GettableVolumeQuota{}
 	this.Id = id
 	this.Path = path
@@ -105,9 +105,9 @@ func (o *GettableVolumeQuota) SetPath(v string) {
 }
 
 // GetInodes returns the Inodes field value
-func (o *GettableVolumeQuota) GetInodes() int32 {
+func (o *GettableVolumeQuota) GetInodes() int64 {
 	if o == nil {
-		var ret int32
+		var ret int64
 		return ret
 	}
 
@@ -116,7 +116,7 @@ func (o *GettableVolumeQuota) GetInodes() int32 {
 
 // GetInodesOk returns a tuple with the Inodes field value
 // and a boolean to check if the value has been set.
-func (o *GettableVolumeQuota) GetInodesOk() (*int32, bool) {
+func (o *GettableVolumeQuota) GetInodesOk() (*int64, bool) {
 	if o == nil {
 		return nil, false
 	}
@@ -124,7 +124,7 @@ func (o *GettableVolumeQuota) GetInodesOk() (*int32, bool) {
 }
 
 // SetInodes sets field value
-func (o *GettableVolumeQuota) SetInodes(v int32) {
+func (o *GettableVolumeQuota) SetInodes(v int64) {
 	o.Inodes = v
 }
 
@@ -153,9 +153,9 @@ func (o *GettableVolumeQuota) SetSize(v int64) {
 }
 
 // GetUsedInodes returns the UsedInodes field value if set, zero value otherwise.
-func (o *GettableVolumeQuota) GetUsedInodes() int32 {
+func (o *GettableVolumeQuota) GetUsedInodes() int64 {
 	if o == nil || IsNil(o.UsedInodes) {
-		var ret int32
+		var ret int64
 		return ret
 	}
 	return *o.UsedInodes
@@ -163,7 +163,7 @@ func (o *GettableVolumeQuota) GetUsedInodes() int32 {
 
 // GetUsedInodesOk returns a tuple with the UsedInodes field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GettableVolumeQuota) GetUsedInodesOk() (*int32, bool) {
+func (o *GettableVolumeQuota) GetUsedInodesOk() (*int64, bool) {
 	if o == nil || IsNil(o.UsedInodes) {
 		return nil, false
 	}
@@ -179,8 +179,8 @@ func (o *GettableVolumeQuota) HasUsedInodes() bool {
 	return false
 }
 
-// SetUsedInodes gets a reference to the given int32 and assigns it to the UsedInodes field.
-func (o *GettableVolumeQuota) SetUsedInodes(v int32) {
+// SetUsedInodes gets a reference to the given int64 and assigns it to the UsedInodes field.
+func (o *GettableVolumeQuota) SetUsedInodes(v int64) {
 	o.UsedInodes = &v
 }
 
