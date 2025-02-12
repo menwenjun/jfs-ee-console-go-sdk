@@ -27,6 +27,9 @@ type GettableVolumeExport struct {
 	Readonly *bool `json:"readonly,omitempty"`
 	Appendonly *bool `json:"appendonly,omitempty"`
 	Internalip *bool `json:"internalip,omitempty"`
+	Nobgjob *bool `json:"nobgjob,omitempty"`
+	Maproot *string `json:"maproot,omitempty"`
+	Mapall *string `json:"mapall,omitempty"`
 	Token *string `json:"token,omitempty"`
 	Passwd *string `json:"passwd,omitempty"`
 	Qos *string `json:"qos,omitempty"`
@@ -275,6 +278,102 @@ func (o *GettableVolumeExport) SetInternalip(v bool) {
 	o.Internalip = &v
 }
 
+// GetNobgjob returns the Nobgjob field value if set, zero value otherwise.
+func (o *GettableVolumeExport) GetNobgjob() bool {
+	if o == nil || IsNil(o.Nobgjob) {
+		var ret bool
+		return ret
+	}
+	return *o.Nobgjob
+}
+
+// GetNobgjobOk returns a tuple with the Nobgjob field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GettableVolumeExport) GetNobgjobOk() (*bool, bool) {
+	if o == nil || IsNil(o.Nobgjob) {
+		return nil, false
+	}
+	return o.Nobgjob, true
+}
+
+// HasNobgjob returns a boolean if a field has been set.
+func (o *GettableVolumeExport) HasNobgjob() bool {
+	if o != nil && !IsNil(o.Nobgjob) {
+		return true
+	}
+
+	return false
+}
+
+// SetNobgjob gets a reference to the given bool and assigns it to the Nobgjob field.
+func (o *GettableVolumeExport) SetNobgjob(v bool) {
+	o.Nobgjob = &v
+}
+
+// GetMaproot returns the Maproot field value if set, zero value otherwise.
+func (o *GettableVolumeExport) GetMaproot() string {
+	if o == nil || IsNil(o.Maproot) {
+		var ret string
+		return ret
+	}
+	return *o.Maproot
+}
+
+// GetMaprootOk returns a tuple with the Maproot field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GettableVolumeExport) GetMaprootOk() (*string, bool) {
+	if o == nil || IsNil(o.Maproot) {
+		return nil, false
+	}
+	return o.Maproot, true
+}
+
+// HasMaproot returns a boolean if a field has been set.
+func (o *GettableVolumeExport) HasMaproot() bool {
+	if o != nil && !IsNil(o.Maproot) {
+		return true
+	}
+
+	return false
+}
+
+// SetMaproot gets a reference to the given string and assigns it to the Maproot field.
+func (o *GettableVolumeExport) SetMaproot(v string) {
+	o.Maproot = &v
+}
+
+// GetMapall returns the Mapall field value if set, zero value otherwise.
+func (o *GettableVolumeExport) GetMapall() string {
+	if o == nil || IsNil(o.Mapall) {
+		var ret string
+		return ret
+	}
+	return *o.Mapall
+}
+
+// GetMapallOk returns a tuple with the Mapall field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *GettableVolumeExport) GetMapallOk() (*string, bool) {
+	if o == nil || IsNil(o.Mapall) {
+		return nil, false
+	}
+	return o.Mapall, true
+}
+
+// HasMapall returns a boolean if a field has been set.
+func (o *GettableVolumeExport) HasMapall() bool {
+	if o != nil && !IsNil(o.Mapall) {
+		return true
+	}
+
+	return false
+}
+
+// SetMapall gets a reference to the given string and assigns it to the Mapall field.
+func (o *GettableVolumeExport) SetMapall(v string) {
+	o.Mapall = &v
+}
+
 // GetToken returns the Token field value if set, zero value otherwise.
 func (o *GettableVolumeExport) GetToken() string {
 	if o == nil || IsNil(o.Token) {
@@ -465,6 +564,15 @@ func (o GettableVolumeExport) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Internalip) {
 		toSerialize["internalip"] = o.Internalip
+	}
+	if !IsNil(o.Nobgjob) {
+		toSerialize["nobgjob"] = o.Nobgjob
+	}
+	if !IsNil(o.Maproot) {
+		toSerialize["maproot"] = o.Maproot
+	}
+	if !IsNil(o.Mapall) {
+		toSerialize["mapall"] = o.Mapall
 	}
 	if !IsNil(o.Token) {
 		toSerialize["token"] = o.Token

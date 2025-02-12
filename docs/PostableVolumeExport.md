@@ -9,6 +9,9 @@ Name | Type | Description | Notes
 **Readonly** | Pointer to **bool** |  | [optional] [default to false]
 **Appendonly** | Pointer to **bool** |  | [optional] [default to false]
 **Internalip** | Pointer to **bool** |  | [optional] [default to false]
+**Nobgjob** | Pointer to **bool** |  | [optional] [default to false]
+**Maproot** | Pointer to **string** |  | [optional] [default to "0:0"]
+**Mapall** | Pointer to **string** |  | [optional] [default to ""]
 **Qos** | Pointer to **string** | qos format: &#x60;&lt;put&gt;[:&lt;get&gt;[:&lt;compact&gt;]]&#x60;, put, get and compact has the same format &#x60;&lt;number&gt;[K|M|G|P|T|Z|E]&#x60;, 0 or empty value means unlimited.  the unit for qos is &#x60;B/s&#x60;.  examples: - &#x60;10M&#x60;, set put to 10MB/s, get and compact to unlimited - &#x60;10M:10M&#x60;, set put to 10MB/s, get to 10MB/s and compact to unlimited - &#x60;1k:1m:10m&#x60;, set put to 1KB/s, get to 1MB/s and compact to 10MB/s. the suffix(k, m) is case-insensitive. - &#x60;10M:0:10M&#x60;, set put to 10MB/s, get to unlimited and compact to 10MB/s  | [optional] [default to ""]
 **Extend** | Pointer to **string** |  | [optional] [default to ""]
 **Subdir** | Pointer to **string** |  | [optional] [default to "/"]
@@ -156,6 +159,81 @@ SetInternalip sets Internalip field to given value.
 `func (o *PostableVolumeExport) HasInternalip() bool`
 
 HasInternalip returns a boolean if a field has been set.
+
+### GetNobgjob
+
+`func (o *PostableVolumeExport) GetNobgjob() bool`
+
+GetNobgjob returns the Nobgjob field if non-nil, zero value otherwise.
+
+### GetNobgjobOk
+
+`func (o *PostableVolumeExport) GetNobgjobOk() (*bool, bool)`
+
+GetNobgjobOk returns a tuple with the Nobgjob field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNobgjob
+
+`func (o *PostableVolumeExport) SetNobgjob(v bool)`
+
+SetNobgjob sets Nobgjob field to given value.
+
+### HasNobgjob
+
+`func (o *PostableVolumeExport) HasNobgjob() bool`
+
+HasNobgjob returns a boolean if a field has been set.
+
+### GetMaproot
+
+`func (o *PostableVolumeExport) GetMaproot() string`
+
+GetMaproot returns the Maproot field if non-nil, zero value otherwise.
+
+### GetMaprootOk
+
+`func (o *PostableVolumeExport) GetMaprootOk() (*string, bool)`
+
+GetMaprootOk returns a tuple with the Maproot field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMaproot
+
+`func (o *PostableVolumeExport) SetMaproot(v string)`
+
+SetMaproot sets Maproot field to given value.
+
+### HasMaproot
+
+`func (o *PostableVolumeExport) HasMaproot() bool`
+
+HasMaproot returns a boolean if a field has been set.
+
+### GetMapall
+
+`func (o *PostableVolumeExport) GetMapall() string`
+
+GetMapall returns the Mapall field if non-nil, zero value otherwise.
+
+### GetMapallOk
+
+`func (o *PostableVolumeExport) GetMapallOk() (*string, bool)`
+
+GetMapallOk returns a tuple with the Mapall field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMapall
+
+`func (o *PostableVolumeExport) SetMapall(v string)`
+
+SetMapall sets Mapall field to given value.
+
+### HasMapall
+
+`func (o *PostableVolumeExport) HasMapall() bool`
+
+HasMapall returns a boolean if a field has been set.
 
 ### GetQos
 

@@ -11,6 +11,9 @@ Name | Type | Description | Notes
 **Readonly** | Pointer to **bool** |  | [optional] 
 **Appendonly** | Pointer to **bool** |  | [optional] 
 **Internalip** | Pointer to **bool** |  | [optional] 
+**Nobgjob** | Pointer to **bool** |  | [optional] 
+**Maproot** | Pointer to **string** |  | [optional] 
+**Mapall** | Pointer to **string** |  | [optional] 
 **Token** | Pointer to **string** |  | [optional] 
 **Passwd** | Pointer to **string** |  | [optional] 
 **Qos** | Pointer to **string** |  | [optional] 
@@ -210,6 +213,81 @@ SetInternalip sets Internalip field to given value.
 `func (o *GettableVolumeExport) HasInternalip() bool`
 
 HasInternalip returns a boolean if a field has been set.
+
+### GetNobgjob
+
+`func (o *GettableVolumeExport) GetNobgjob() bool`
+
+GetNobgjob returns the Nobgjob field if non-nil, zero value otherwise.
+
+### GetNobgjobOk
+
+`func (o *GettableVolumeExport) GetNobgjobOk() (*bool, bool)`
+
+GetNobgjobOk returns a tuple with the Nobgjob field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNobgjob
+
+`func (o *GettableVolumeExport) SetNobgjob(v bool)`
+
+SetNobgjob sets Nobgjob field to given value.
+
+### HasNobgjob
+
+`func (o *GettableVolumeExport) HasNobgjob() bool`
+
+HasNobgjob returns a boolean if a field has been set.
+
+### GetMaproot
+
+`func (o *GettableVolumeExport) GetMaproot() string`
+
+GetMaproot returns the Maproot field if non-nil, zero value otherwise.
+
+### GetMaprootOk
+
+`func (o *GettableVolumeExport) GetMaprootOk() (*string, bool)`
+
+GetMaprootOk returns a tuple with the Maproot field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMaproot
+
+`func (o *GettableVolumeExport) SetMaproot(v string)`
+
+SetMaproot sets Maproot field to given value.
+
+### HasMaproot
+
+`func (o *GettableVolumeExport) HasMaproot() bool`
+
+HasMaproot returns a boolean if a field has been set.
+
+### GetMapall
+
+`func (o *GettableVolumeExport) GetMapall() string`
+
+GetMapall returns the Mapall field if non-nil, zero value otherwise.
+
+### GetMapallOk
+
+`func (o *GettableVolumeExport) GetMapallOk() (*string, bool)`
+
+GetMapallOk returns a tuple with the Mapall field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMapall
+
+`func (o *GettableVolumeExport) SetMapall(v string)`
+
+SetMapall sets Mapall field to given value.
+
+### HasMapall
+
+`func (o *GettableVolumeExport) HasMapall() bool`
+
+HasMapall returns a boolean if a field has been set.
 
 ### GetToken
 

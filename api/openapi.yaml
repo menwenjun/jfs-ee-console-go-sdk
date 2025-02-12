@@ -2253,18 +2253,21 @@ components:
         blockSize: 0
     gettableVolumeExport:
       example:
+        appendonly: false
+        internalip: false
+        mapall: ""
+        token: d9ae3e863a050e4fd01f3c0a0665e870d305b347
         apionly: false
         extend: ""
-        appendonly: false
         subdir: /path/to/subdir
+        maproot: 0:0
         readonly: false
         qos: ""
         passwd: 41bb953fa782302f4c46755cc2b8e32a00fc5b13
         iprange: '*'
         id: 1
-        internalip: false
+        nobgjob: false
         desc: default
-        token: d9ae3e863a050e4fd01f3c0a0665e870d305b347
       properties:
         id:
           minimum: 1
@@ -2287,6 +2290,15 @@ components:
         internalip:
           example: false
           type: boolean
+        nobgjob:
+          example: false
+          type: boolean
+        maproot:
+          example: 0:0
+          type: string
+        mapall:
+          example: ""
+          type: string
         token:
           example: d9ae3e863a050e4fd01f3c0a0665e870d305b347
           type: string
@@ -2327,6 +2339,15 @@ components:
         internalip:
           default: false
           type: boolean
+        nobgjob:
+          default: false
+          type: boolean
+        maproot:
+          default: 0:0
+          type: string
+        mapall:
+          default: ""
+          type: string
         qos:
           default: ""
           description: |
@@ -2513,10 +2534,12 @@ components:
       type: object
     FileInfo:
       example:
+        atime: 0
         is_dir: true
         name: name
         length: 0
         nlink: 0
+        ctime: 0
         type: f
         mtime: 0
       properties:
@@ -2553,6 +2576,14 @@ components:
           minimum: 0
           type: integer
         mtime:
+          format: int64
+          minimum: 0
+          type: integer
+        atime:
+          format: int64
+          minimum: 0
+          type: integer
+        ctime:
           format: int64
           minimum: 0
           type: integer

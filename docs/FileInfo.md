@@ -10,6 +10,8 @@ Name | Type | Description | Notes
 **Length** | Pointer to **int64** |  | [optional] 
 **Nlink** | Pointer to **int32** |  | [optional] 
 **Mtime** | Pointer to **int64** |  | [optional] 
+**Atime** | Pointer to **int64** |  | [optional] 
+**Ctime** | Pointer to **int64** |  | [optional] 
 
 ## Methods
 
@@ -179,6 +181,56 @@ SetMtime sets Mtime field to given value.
 `func (o *FileInfo) HasMtime() bool`
 
 HasMtime returns a boolean if a field has been set.
+
+### GetAtime
+
+`func (o *FileInfo) GetAtime() int64`
+
+GetAtime returns the Atime field if non-nil, zero value otherwise.
+
+### GetAtimeOk
+
+`func (o *FileInfo) GetAtimeOk() (*int64, bool)`
+
+GetAtimeOk returns a tuple with the Atime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAtime
+
+`func (o *FileInfo) SetAtime(v int64)`
+
+SetAtime sets Atime field to given value.
+
+### HasAtime
+
+`func (o *FileInfo) HasAtime() bool`
+
+HasAtime returns a boolean if a field has been set.
+
+### GetCtime
+
+`func (o *FileInfo) GetCtime() int64`
+
+GetCtime returns the Ctime field if non-nil, zero value otherwise.
+
+### GetCtimeOk
+
+`func (o *FileInfo) GetCtimeOk() (*int64, bool)`
+
+GetCtimeOk returns a tuple with the Ctime field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCtime
+
+`func (o *FileInfo) SetCtime(v int64)`
+
+SetCtime sets Ctime field to given value.
+
+### HasCtime
+
+`func (o *FileInfo) HasCtime() bool`
+
+HasCtime returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

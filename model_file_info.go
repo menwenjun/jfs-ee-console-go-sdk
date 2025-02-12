@@ -27,6 +27,8 @@ type FileInfo struct {
 	Length *int64 `json:"length,omitempty"`
 	Nlink *int32 `json:"nlink,omitempty"`
 	Mtime *int64 `json:"mtime,omitempty"`
+	Atime *int64 `json:"atime,omitempty"`
+	Ctime *int64 `json:"ctime,omitempty"`
 }
 
 // NewFileInfo instantiates a new FileInfo object
@@ -238,6 +240,70 @@ func (o *FileInfo) SetMtime(v int64) {
 	o.Mtime = &v
 }
 
+// GetAtime returns the Atime field value if set, zero value otherwise.
+func (o *FileInfo) GetAtime() int64 {
+	if o == nil || IsNil(o.Atime) {
+		var ret int64
+		return ret
+	}
+	return *o.Atime
+}
+
+// GetAtimeOk returns a tuple with the Atime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FileInfo) GetAtimeOk() (*int64, bool) {
+	if o == nil || IsNil(o.Atime) {
+		return nil, false
+	}
+	return o.Atime, true
+}
+
+// HasAtime returns a boolean if a field has been set.
+func (o *FileInfo) HasAtime() bool {
+	if o != nil && !IsNil(o.Atime) {
+		return true
+	}
+
+	return false
+}
+
+// SetAtime gets a reference to the given int64 and assigns it to the Atime field.
+func (o *FileInfo) SetAtime(v int64) {
+	o.Atime = &v
+}
+
+// GetCtime returns the Ctime field value if set, zero value otherwise.
+func (o *FileInfo) GetCtime() int64 {
+	if o == nil || IsNil(o.Ctime) {
+		var ret int64
+		return ret
+	}
+	return *o.Ctime
+}
+
+// GetCtimeOk returns a tuple with the Ctime field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *FileInfo) GetCtimeOk() (*int64, bool) {
+	if o == nil || IsNil(o.Ctime) {
+		return nil, false
+	}
+	return o.Ctime, true
+}
+
+// HasCtime returns a boolean if a field has been set.
+func (o *FileInfo) HasCtime() bool {
+	if o != nil && !IsNil(o.Ctime) {
+		return true
+	}
+
+	return false
+}
+
+// SetCtime gets a reference to the given int64 and assigns it to the Ctime field.
+func (o *FileInfo) SetCtime(v int64) {
+	o.Ctime = &v
+}
+
 func (o FileInfo) MarshalJSON() ([]byte, error) {
 	toSerialize,err := o.ToMap()
 	if err != nil {
@@ -265,6 +331,12 @@ func (o FileInfo) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Mtime) {
 		toSerialize["mtime"] = o.Mtime
+	}
+	if !IsNil(o.Atime) {
+		toSerialize["atime"] = o.Atime
+	}
+	if !IsNil(o.Ctime) {
+		toSerialize["ctime"] = o.Ctime
 	}
 	return toSerialize, nil
 }

@@ -26,6 +26,9 @@ type PostableVolumeExport struct {
 	Readonly *bool `json:"readonly,omitempty"`
 	Appendonly *bool `json:"appendonly,omitempty"`
 	Internalip *bool `json:"internalip,omitempty"`
+	Nobgjob *bool `json:"nobgjob,omitempty"`
+	Maproot *string `json:"maproot,omitempty"`
+	Mapall *string `json:"mapall,omitempty"`
 	// qos format: `<put>[:<get>[:<compact>]]`, put, get and compact has the same format `<number>[K|M|G|P|T|Z|E]`, 0 or empty value means unlimited.  the unit for qos is `B/s`.  examples: - `10M`, set put to 10MB/s, get and compact to unlimited - `10M:10M`, set put to 10MB/s, get to 10MB/s and compact to unlimited - `1k:1m:10m`, set put to 1KB/s, get to 1MB/s and compact to 10MB/s. the suffix(k, m) is case-insensitive. - `10M:0:10M`, set put to 10MB/s, get to unlimited and compact to 10MB/s 
 	Qos *string `json:"qos,omitempty"`
 	Extend *string `json:"extend,omitempty"`
@@ -46,6 +49,12 @@ func NewPostableVolumeExport() *PostableVolumeExport {
 	this.Appendonly = &appendonly
 	var internalip bool = false
 	this.Internalip = &internalip
+	var nobgjob bool = false
+	this.Nobgjob = &nobgjob
+	var maproot string = "0:0"
+	this.Maproot = &maproot
+	var mapall string = ""
+	this.Mapall = &mapall
 	var qos string = ""
 	this.Qos = &qos
 	var extend string = ""
@@ -68,6 +77,12 @@ func NewPostableVolumeExportWithDefaults() *PostableVolumeExport {
 	this.Appendonly = &appendonly
 	var internalip bool = false
 	this.Internalip = &internalip
+	var nobgjob bool = false
+	this.Nobgjob = &nobgjob
+	var maproot string = "0:0"
+	this.Maproot = &maproot
+	var mapall string = ""
+	this.Mapall = &mapall
 	var qos string = ""
 	this.Qos = &qos
 	var extend string = ""
@@ -237,6 +252,102 @@ func (o *PostableVolumeExport) SetInternalip(v bool) {
 	o.Internalip = &v
 }
 
+// GetNobgjob returns the Nobgjob field value if set, zero value otherwise.
+func (o *PostableVolumeExport) GetNobgjob() bool {
+	if o == nil || IsNil(o.Nobgjob) {
+		var ret bool
+		return ret
+	}
+	return *o.Nobgjob
+}
+
+// GetNobgjobOk returns a tuple with the Nobgjob field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PostableVolumeExport) GetNobgjobOk() (*bool, bool) {
+	if o == nil || IsNil(o.Nobgjob) {
+		return nil, false
+	}
+	return o.Nobgjob, true
+}
+
+// HasNobgjob returns a boolean if a field has been set.
+func (o *PostableVolumeExport) HasNobgjob() bool {
+	if o != nil && !IsNil(o.Nobgjob) {
+		return true
+	}
+
+	return false
+}
+
+// SetNobgjob gets a reference to the given bool and assigns it to the Nobgjob field.
+func (o *PostableVolumeExport) SetNobgjob(v bool) {
+	o.Nobgjob = &v
+}
+
+// GetMaproot returns the Maproot field value if set, zero value otherwise.
+func (o *PostableVolumeExport) GetMaproot() string {
+	if o == nil || IsNil(o.Maproot) {
+		var ret string
+		return ret
+	}
+	return *o.Maproot
+}
+
+// GetMaprootOk returns a tuple with the Maproot field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PostableVolumeExport) GetMaprootOk() (*string, bool) {
+	if o == nil || IsNil(o.Maproot) {
+		return nil, false
+	}
+	return o.Maproot, true
+}
+
+// HasMaproot returns a boolean if a field has been set.
+func (o *PostableVolumeExport) HasMaproot() bool {
+	if o != nil && !IsNil(o.Maproot) {
+		return true
+	}
+
+	return false
+}
+
+// SetMaproot gets a reference to the given string and assigns it to the Maproot field.
+func (o *PostableVolumeExport) SetMaproot(v string) {
+	o.Maproot = &v
+}
+
+// GetMapall returns the Mapall field value if set, zero value otherwise.
+func (o *PostableVolumeExport) GetMapall() string {
+	if o == nil || IsNil(o.Mapall) {
+		var ret string
+		return ret
+	}
+	return *o.Mapall
+}
+
+// GetMapallOk returns a tuple with the Mapall field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PostableVolumeExport) GetMapallOk() (*string, bool) {
+	if o == nil || IsNil(o.Mapall) {
+		return nil, false
+	}
+	return o.Mapall, true
+}
+
+// HasMapall returns a boolean if a field has been set.
+func (o *PostableVolumeExport) HasMapall() bool {
+	if o != nil && !IsNil(o.Mapall) {
+		return true
+	}
+
+	return false
+}
+
+// SetMapall gets a reference to the given string and assigns it to the Mapall field.
+func (o *PostableVolumeExport) SetMapall(v string) {
+	o.Mapall = &v
+}
+
 // GetQos returns the Qos field value if set, zero value otherwise.
 func (o *PostableVolumeExport) GetQos() string {
 	if o == nil || IsNil(o.Qos) {
@@ -357,6 +468,15 @@ func (o PostableVolumeExport) ToMap() (map[string]interface{}, error) {
 	}
 	if !IsNil(o.Internalip) {
 		toSerialize["internalip"] = o.Internalip
+	}
+	if !IsNil(o.Nobgjob) {
+		toSerialize["nobgjob"] = o.Nobgjob
+	}
+	if !IsNil(o.Maproot) {
+		toSerialize["maproot"] = o.Maproot
+	}
+	if !IsNil(o.Mapall) {
+		toSerialize["mapall"] = o.Mapall
 	}
 	if !IsNil(o.Qos) {
 		toSerialize["qos"] = o.Qos
